@@ -1,0 +1,6 @@
+pistol
+medkit
+knife
+flashlight
+knife1
+flashlight1

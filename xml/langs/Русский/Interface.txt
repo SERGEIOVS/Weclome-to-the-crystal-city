@@ -1,0 +1,7 @@
+Cancel
+Apply
+Remove
+Add
+Open
+Close
+Ok

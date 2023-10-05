@@ -1,0 +1,10 @@
+3000,3000,Player
+3000,3400,Player
+3000,3800,Player
+3000,4200,Player
+3000,4600,Player
+3000,5000,Player
+3000,5400,Player
+3000,5800,Player
+3000,6200,Player
+3000,6600,Player

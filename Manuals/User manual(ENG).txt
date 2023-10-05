@@ -1,0 +1,60 @@
+--------
+Controls
+--------
+
+Single player
+--------------
+
+Movement
+d - move right
+a - move left
+s - move down
+w - move up
+spacebar - jump
+
+Inventory
+b - open a backapack / bag
+shift + b - close a backpack / bag
+e - interact
+
+Interact
+--------
+r - reload
+
+
+mouse wheel
+-----------
+change an item in inventory(play mode)
+change music volume in a settings menu
+ 
+
+p - start game
+f12 - save game and quit game
+f9 - load game
+f3 - make a screenshot
+escape + c - crafting menu
+escape - main menu
+shift + s - screenshots menu
+escape + s - savings menu
+o - options menu
+g - toggle god mode(visible coords,no damage, unlimited ammo etc. )
+shift + r - start recording video(no sound)
+shift + p - video recordings menu
+
+
+multiplayer mode
+----------------
+tab - players table
+shift + c - chat
+shift + v - voice chat
+
+
+mini map
+--------
+arrow up or arrow down (numpad) - toggle  mini map
+plus or minus (numpad) -  change mini map scale
+* (numpad) - new checkpoint
+enter (numpad) - checkpoints menu
+5 (numpad) - toggle mini map full screen
+0 (numpad) - mini map settings
+=================================================
