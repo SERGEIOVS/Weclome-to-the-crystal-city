@@ -27,29 +27,26 @@ SET time_zone = "+00:00";
 -- Структура таблицы `units`
 --
 
-CREATE TABLE `units` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL
+CREATE TABLE `Units` (
+  `x` int(11) NOT NULL,
+  `y` varchar(100) NOT NULL,
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Дамп данных таблицы `units`
+-- Дамп данных таблицы `Units`
 --
 
-INSERT INTO `units` (`id`, `name`, `email`, `mobile`, `password`) VALUES
-(4, 'Sergei Sergei', 'mr.serz98@mail.ru', '8 (434) 234-52-35', '111');
+INSERT INTO `Units` (`x`, `y`) VALUES ('123', '223');
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `crud`
+-- Индексы таблицы `Units`
 --
-ALTER TABLE `units`
+ALTER TABLE `Units`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -59,9 +56,9 @@ ALTER TABLE `units`
 --
 -- AUTO_INCREMENT для таблицы `crud`
 --
-ALTER TABLE `units`
+ALTER TABLE `Units`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
+COMMIT ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
