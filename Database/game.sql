@@ -27,12 +27,6 @@ SET time_zone = "+00:00";
 -- Структура таблицы `units`
 --
 
-CREATE TABLE `Units` (
-  `x` int(11) NOT NULL,
-  `y` varchar(100) NOT NULL,
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Дамп данных таблицы `Units`
 --

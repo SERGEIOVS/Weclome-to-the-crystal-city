@@ -8,8 +8,7 @@ import time ; from Funcs import * ; from Settings import * ; from Items import *
 import pprint
 
 print(sys.path)
-if mods_dir_path in sys.path : print() ; print() ; print('mods folder added ! ') ; print(os.listdir(mods_dir_path))
-
+if mods_dir_path in sys.path : print() ; print() ; print('mods folder added ! ') ; print(os.listdir(mods_dir_path)) ; print() ; print()
 pg.init()
 
 pressed = pg.mouse.get_pressed() ; pos = pg.mouse.get_pos() ; clock = pg.time.Clock() ; FPS = 60 ; clock.tick(FPS)

@@ -1,9 +1,7 @@
 import pygame as pg , datetime ; from Units import * ; from Items import * ; import os , math , logging ;import sys
 pg.init() ; pg.font.init()
-
-#import  getpass
-#password = getpass.getpass('123 : ')
-#print(password)
+import tabulate ; from tabulate import tabulate
+import  getpass
 
 #Game directory
 
@@ -106,40 +104,66 @@ x_1_list =  -camera.rect[ 0 ] + int(camera_x) + int(screen_width) / 2 + hero_che
 distances = [] ; distance_num = 0 ; calc_dist = math.sqrt( (( x_2_list - x_1_list * hero_checkpoint_offset_x) ** 2) +  ((y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) // 100) ; show_distance  = small_font.render('Distance : ' + str(int(calc_dist) // 100) + ' m' , False , small_font_color ) ; blit_action = 0 ; blit_distance  = 1
 
 import pymysql
-querries_count = 10 ; host = "127.0.0.1" ; user = "root" ; password = '' ; db_name = "game" ; db_tables_list =  ['Units'] ; db_table_name = 'Units'
+querries_types = [] ; host = "127.0.0.1" ; user = "root" ; db_password = '' ; db_name = "game" ; db_table_name = "citizens"
+
 
 try:
     connection = pymysql.connect(
         host = "localhost" ,
-        port = 3306,
+        port = 3306 ,
         user = user ,
-        password = password,
-        database = db_name,
+        password = db_password ,
+        database = db_name ,
         cursorclass = pymysql.cursors.DictCursor
     )
 
+    print()
+    print()
     print("successfully connected...")
     print()
-    print("#" * 20)
     print()
 
     try:
         cursor = connection.cursor()
 
+        #create table
+        for i in range(len(Companions_file1)):
+
+            with connection.cursor() as cursor:
+                create_table_query = "CREATE TABLE if not exists " + str(Companion_types[i]) + "(id int AUTO_INCREMENT," \
+                                    " x varchar(32)," \
+                                    " y varchar(32), PRIMARY KEY (id));"
+                cursor.execute(create_table_query)
+                #print('Table ' + str(Companion_types[i]) + ' created successfully')
+
+
+        """
         # create table
-        #with connection.cursor() as cursor:
-        #     create_table_query = "CREATE TABLE `" + str(db_table_name) + "`(id int AUTO_INCREMENT," , " x varchar(32)," , " y varchar(32), PRIMARY KEY (id));"
+        # with connection.cursor() as cursor:
+        #     create_table_query = "CREATE TABLE `users`(id int AUTO_INCREMENT," \
+        #                          " name varchar(32)," \
+        #                          " password varchar(32)," \
+        #                          " email varchar(32), PRIMARY KEY (id));"
         #     cursor.execute(create_table_query)
         #     print("Table created successfully")
+        
+        """
 
-        # insert data
+        #insert data
         for i in range(len(Companions_file1)):
             with connection.cursor() as cursor:
-                insert_query = "INSERT INTO `" + str(db_table_name) + "`(x,y) VALUES ('123' , '223') ; "
-
+                insert_query = "INSERT INTO " + str(db_table_name) + " (x,y) VALUES ('123' ,'122') ; "
                 cursor.execute(insert_query)
                 connection.commit()
-                print()
+
+        # insert data
+        #for i in range(len(Companions_file1)):
+        #    with connection.cursor() as cursor:
+        #        insert_query = "INSERT INTO ``(x,y) VALUES ('123' , '223') ; "
+        #        insert_query = "INSERT INTO `" + str(db_table_name) + "' (name, password, email) VALUES ('111' , '222') ; "
+        #        cursor.execute(insert_query)
+        #       connection.commit()
+        #        print()
 
 
         # update data
@@ -155,7 +179,6 @@ try:
         #     cursor.execute(delete_query)
         #     connection.commit()
 
-
         #drop table
         #with connection.cursor() as cursor:
         #     drop_table_query = "DROP TABLE `users`;"
@@ -163,21 +186,16 @@ try:
 
 
         # select all data from table
-        with connection.cursor() as cursor:
-            print('Table name = ' , db_table_name)
-            select_data = "SELECT * FROM `" + str(db_table_name) + "`"
-            cursor.execute(select_data)
-
-
-            print()
+        #with connection.cursor() as cursor:
+        #    select_data = "SELECT * FROM `" + str(db_table_name) + "`"
+        #    cursor.execute(select_data)
+        #    print()
             
-            # cursor.execute("SELECT * FROM `users`")
-            rows = cursor.fetchall()
-            for row in rows:
-                print(row)
-            print()
-            print("#" * 20)
-            print()
+        # cursor.execute("SELECT * FROM `users`")
+        rows = cursor.fetchall()
+        for row in rows:
+            print(tabulate(row))
+
 
     finally:
         connection.close()
@@ -185,3 +203,5 @@ try:
 except Exception as ex:
     print("Connection refused...")
     print(ex)
+    print()
+    print()

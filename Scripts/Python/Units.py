@@ -37,8 +37,10 @@ show_hero_armor = big_font.render( str( armor     ).strip() + " / " + str( max_a
 show_radiation  = big_font.render( str( radiation ).strip() + " / " + str( max_radiation   ).strip() , False , ( 255 , 0 , 0 ) ) ; show_energy  = big_font.render( str( energy).strip()     + ' / ' + str( max_energy      ).strip() , False , ( 255 , 0 , 0 ) )
 nicknames_file_name = 'txt/nicknames.txt' ; nicknamesfile_mode = 'r' ; nicknames_file = open (nicknames_file_name , nicknamesfile_mode) ; nicknames_file1 = nicknames_file.readlines() ; nicknameslist = []
 
+Companions_class_values = ['x','y','image']
+
 class Companions:
-    def __init__( self , x , y , image):
+    def __init__(self , x  , y , image ):
         self.x         = x
         self.y         = y    
         self.image     = image
@@ -66,7 +68,8 @@ for i in range( len ( Companions_file1 ) ) :
     Companions_list.append( i )
 
 class Players:
-    def __init__( self , x , y , image) :
+    def __init__( self ,x,y,image) :
+        #Companions_class_values[i]
         self.x         = x
         self.y         = y    
         self.image     = image
