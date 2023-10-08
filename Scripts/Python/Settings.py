@@ -119,7 +119,7 @@ try:
 
     print()
     print()
-    print("successfully connected...")
+    print("Successfully connected...")
     print()
     print()
 
@@ -134,6 +134,10 @@ try:
                                     " x varchar(32)," \
                                     " y varchar(32), PRIMARY KEY (id));"
                 cursor.execute(create_table_query)
+
+        else:
+            print('The table ' + str(Companion_types[i]) + ' has already been created!')
+
                 #print('Table ' + str(Companion_types[i]) + ' created successfully')
 
 
@@ -194,8 +198,7 @@ try:
         # cursor.execute("SELECT * FROM `users`")
         rows = cursor.fetchall()
         for row in rows:
-            print(tabulate(row))
-
+            print(row)
 
     finally:
         connection.close()
