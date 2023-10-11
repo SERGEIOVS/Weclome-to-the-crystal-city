@@ -27,6 +27,8 @@ Buildings_images_list = []
 buildings_types = os.listdir('Objects/Background/Buildings/')
 Buildings_categories  = []
 
+Sea_width = 300
+
 class Buildings:
     def __init__( self , x , y , image , category , rooms) :
         self.x = x

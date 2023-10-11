@@ -52,10 +52,12 @@ def cutscene() : pass
 
 def draw_mini_map():
     if show_map == 1:
-        for i in range( len ( islands_file1 ) ) : pg.draw.rect(mini_map_surf  , (100 , 50 , 0) , (minimap_border_offset + int(islands_file1[ i ].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset ,  minimap_border_offset + int(islands_file1[ i ].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1,  10 / map_scale ,  10 / map_scale ))
+        for i in range( len ( islands_file1 ) ) :
+            for y in range( len ( islands_file1 ) ) :
+                pg.draw.rect(mini_map_surf  , (100 , 50 , 0) , (minimap_border_offset + Sea_width / (100 * map_scale) + int(islands_file1[i].split(',')[0]) / (100 * map_scale) + i * int(islands_file1[i].split(',')[2])  / (100 * map_scale) , minimap_border_offset + Sea_width / (100 * map_scale) + int(islands_file1[i].split(',')[1]) / (100 * map_scale) + y * int(islands_file1[i].split(',')[2])  / (100 * map_scale) ,  5 / map_scale ,  5 / map_scale ))
         
         for i in range( len ( buildings_file1 ) ) :
-             if show_buildings == 1 : pg.draw.rect(mini_map_surf , colors[4]  , (int(buildings_file1[ i ].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset , int(buildings_file1[ i ].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1,  10 / map_scale, 10 / map_scale  ))
+             if show_buildings == 1 : pg.draw.rect(mini_map_surf , colors[4]  , ( int(buildings_file1[ i ].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset , int(buildings_file1[ i ].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1,  10 / map_scale, 10 / map_scale  ))
         
         for i in range( len ( vihicles_file1 ) ) : pg.draw.rect(mini_map_surf , (0 , 0 , 0) , (int(vihicles_file1[i].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset , int(vihicles_file1[i].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1 , 5 / map_scale , 3 / map_scale ))
         
@@ -98,15 +100,16 @@ def Animations():
                             player_animation += 1 ; player_image = pg.image.load('Objects/Characters/Players/' + str(player_types[i]) + '/' + str(player_state) + '/'  + str(player_turn) + '/' + str(player_animation) + '.png')
             
         #Enemy animation
-        for i in range(len(Enemies_file1)) :
-            if int(Enemies_file1[i].split(',')[0]) >= camera.rect[0] + fov and  int(Enemies_file1[i].split(',')[0]) <= camera.rect[0] + int(screen_width) - fov \
-                and int(Enemies_file1[i].split(',')[1]) >= camera.rect[1] + fov and  int(Enemies_file1[i].split(',')[1]) <= camera.rect[1] + int(screen_height) - fov and Enemy_image not in killed_units :
-                if  Enemy_animation <= len(os.listdir(                     'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/')) - 1:
-                    Enemy_image = pg.image.load(                           'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
-                    Enemy_animation += 1 ; Enemy_image  = pg.image.load(   'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
-                if  Enemy_animation >= len(os.listdir(                     'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/')) - 1: 
-                        Enemy_animation =  0 ; Enemy_image = pg.image.load('Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
-                        Enemy_animation += 1 ; Enemy_image = pg.image.load('Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
+        if game_mode != 'Peaceful':
+            for i in range(len(Enemies_file1)) :
+                if int(Enemies_file1[i].split(',')[0]) >= camera.rect[0] + fov and  int(Enemies_file1[i].split(',')[0]) <= camera.rect[0] + int(screen_width) - fov \
+                    and int(Enemies_file1[i].split(',')[1]) >= camera.rect[1] + fov and  int(Enemies_file1[i].split(',')[1]) <= camera.rect[1] + int(screen_height) - fov and Enemy_image not in killed_units :
+                    if  Enemy_animation <= len(os.listdir(                     'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/')) - 1:
+                        Enemy_image = pg.image.load(                           'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
+                        Enemy_animation += 1 ; Enemy_image  = pg.image.load(   'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
+                    if  Enemy_animation >= len(os.listdir(                     'Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/')) - 1: 
+                            Enemy_animation =  0 ; Enemy_image = pg.image.load('Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
+                            Enemy_animation += 1 ; Enemy_image = pg.image.load('Objects/Characters/Enemies/' + str(enemy_types[i]) + '/' + str(i) + '/' + str(enemy_state) + '/' + str(enemy_turn) + '/' + str(Enemy_animation) + '.png')
 
         #Hero animation
         if vihicle_sit == 0:
@@ -116,7 +119,7 @@ def Animations():
                         clock.tick(FPS / fps_1)
                         animation += 1
                         hero_animations_dir = os.listdir('Objects/Characters/Hero/' + str(name) + '/' + str(state) + '/' + str(turn) + '/')
-                        hero       = 'Objects/Characters/Hero/' + str(name) + '/' + str(state)  + '/' + str(turn)  + '/' + str(animation) + '.png'
+                        hero       =                'Objects/Characters/Hero/' + str(name)      + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png'
                         hero_image = pg.image.load( 'Objects/Characters/Hero/' + str(name)      + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png')
                         heroimage  = Image.open(    'Objects/Characters/Hero/' + str(name)      + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png')
                         hero_x , hero_y = int(screen_width) / 2  - heroimage.width /2 , int(screen_height)  /2 - heroimage.height /2
@@ -134,7 +137,8 @@ def Animations():
 
 def mini_map_keyboard_controls():
     keys = pg.key.get_pressed()
-    global map_scale , minimap_x , minimap_y , map_size , minimap_horizontal_offset , minimap_vertical_offset , cancel_icon , cancel_icon_x , cancel_icon_y , mini_map_surf,minimap_object_offset , minimap_object_offset1
+    global map_scale , minimap_x , minimap_y , map_size , minimap_horizontal_offset , minimap_vertical_offset , cancel_icon , cancel_icon_x , cancel_icon_y , mini_map_surf
+    global minimap_object_offset , minimap_object_offset1
 
     if show_map == 1:
         if keys [pg.K_LEFT ] and game_state == 'Play' : minimap_object_offset  -= 1 ; #draw_mini_map()
@@ -279,9 +283,9 @@ def toggle_main_menu():
     if game_state == 'Main menu':
         draw_menu()
         for i in range(len(main_menu_file1)):
-            Button = pg.draw.rect(screen , (Button_color) , ( int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-            screen.blit(main_menu[i]             , ( int(screen_width) /  2 - button_width / 2  , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont ))
-            pg.draw.rect(screen , (Button_frame_color)  ,  ( int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + active_button * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)
+            Button = pg.draw.rect(screen , (Button_color) , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
+            screen.blit(main_menu[i]                      , (int(screen_width) /  2 - button_width / 2  , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont ))
+            pg.draw.rect(screen , (Button_frame_color)    , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + active_button * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)
 
 def text_updating():
     global new_craft,new_quest,checkpoints_list,achievements_list,hero_inventory_nums,show_game_state,ok,apply,cancel,action_counter,checkpoints_file1,dialoge_started,achievements_file1,checkpoint_size,dialoge_num,action,checkpoint_num
@@ -317,9 +321,9 @@ def player_movement():
         keys = pg.key.get_pressed()
 
         if keys[pg.K_a] and game_state == 'Play' and camera.rect[0] >= 0 and camera.rect[1] >= 0 : state = 'go' ; turn  = 'left'; hero_speed = 4 ; vector[0] -= hero_speed ; hero_checkpoint_offset_x -= hero_speed;calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2 ) +  ( (  y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 ));show_distance    = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color )
-        if keys[pg.K_d] and game_state == 'Play'   and camera.rect[0] <= map_width and camera.rect[1] >= 0 : state = 'go' ; turn = 'right' ; hero_speed = 4 ;vector[ 0 ]  += hero_speed ; hero_checkpoint_offset_x += hero_speed ; calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2 ) +  ( (  y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 )) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color ) ; #hero_image =  pg.image.load(hero) ; heroimage = Image.open(hero) ; hero_x , hero_y = int(screen_width) / 2  - heroimage.width / 2 , int(screen_height)  / 2 - heroimage.height / 2
-        if keys[pg.K_w] and game_state == 'Play'and camera.rect[0] >= 0 and camera.rect[1] >= 0 :vector[1] -= hero_speed ; hero_checkpoint_offset_y -= hero_speed ; calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2 ) +  ( (  y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 )) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color )
-        if keys[pg.K_s] and game_state  == 'Play' and camera.rect[0] >= 0 and camera.rect[1] >= 0 : vector[ 1 ]   += hero_speed ; hero_checkpoint_offset_y += hero_speed; hero_x , hero_y = int(screen_width) / 2  - heroimage.width / 2 , int(screen_height)  / 2 - heroimage.height / 2 ; calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2) + ((y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 )) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color )
+        if keys[pg.K_d] and game_state == 'Play' and camera.rect[0] <= map_width and camera.rect[1] >= 0 : state = 'go' ; turn = 'right' ; hero_speed = 4 ;vector[ 0 ]  += hero_speed ; hero_checkpoint_offset_x += hero_speed ; calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2 ) +  ( (  y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 )) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color ) ; #hero_image =  pg.image.load(hero) ; heroimage = Image.open(hero) ; hero_x , hero_y = int(screen_width) / 2  - heroimage.width / 2 , int(screen_height)  / 2 - heroimage.height / 2
+        if keys[pg.K_w] and game_state == 'Play' and camera.rect[0] >= 0 and camera.rect[1] >= 0 :vector[1] -= hero_speed ; hero_checkpoint_offset_y -= hero_speed ; calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2 ) +  ( (  y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 )) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color )
+        if keys[pg.K_s] and game_state == 'Play' and camera.rect[0] >= 0 and camera.rect[1] >= 0 : vector[ 1 ]   += hero_speed ; hero_checkpoint_offset_y += hero_speed; hero_x , hero_y = int(screen_width) / 2  - heroimage.width / 2 , int(screen_height)  / 2 - heroimage.height / 2 ; calc_dist = math.sqrt( (( x_2_list - x_1_list - hero_checkpoint_offset_x) ** 2) + ((y_2_list - y_1_list - hero_checkpoint_offset_y) ** 2 )) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color )
 
         if vector != [ 0 , 0 ] and game_state == 'Play' : camera.move(vector) #Если игрок ходил
 
@@ -328,7 +332,7 @@ def start():
         draw_menu()
         for i in range(len(saves_file1)):
             Button = pg.draw.rect(screen , (Button_color) , ( int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-            screen.blit(saves_list[i]                     , ( int(screen_width) /  2 - button_width / 2  , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont ))
+            screen.blit(saves_list[i]                     , ( int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont ))
             pg.draw.rect(screen , (Button_frame_color)    , ( int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + active_button * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)
 
     if game_state == 'Crafting':
@@ -344,12 +348,15 @@ def start():
 
     if game_state == 'Play':
         mouse_visible = False ; mouse_set_visible = pg.mouse.set_visible( mouse_visible )
+
         if ground == 1:
             for i in range( len ( islands_file1 ) ) : 
                 for y in range( len ( islands_file1 ) ) : 
                     if camera.rect[0] + int(screen_width) - fov >= int(islands_file1[i].split(',')[0]) + y * int(islands_file1[i].split(',')[2])  and camera.rect[1] + int(screen_height) - fov >= int(islands_file1[i].split(',')[1]):
-                        screen.blit( islands_images[ i ] , ( -camera.rect[ 0 ] + int(islands_file1[i].split(',')[0]) + y * int(islands_file1[i].split(',')[2]) , -camera.rect[ 1 ] + int(islands_file1[i].split(',')[1] ) ) )
-        
+                        screen.blit( islands_images[ i ] , ( -camera.rect[ 0 ] +  Sea_width + int(islands_file1[i].split(',')[0]) + i * int(islands_file1[i].split(',')[2]) ,  -camera.rect[ 1 ] +  Sea_width + int(islands_file1[i].split(',')[1]) + y * int(islands_file1[i].split(',')[2])    ) )
+            
+            world_border = pg.draw.rect(screen , (Button_frame_color) , ( -camera.rect[ 0 ] + 0 ,-camera.rect[ 1 ] + 0 , map_width , map_width) , 100 , 0  )
+
             for i in range( len ( roads_file1 ) ) :
                  if camera.rect[0] + int(screen_width) - fov >= int(roads_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(roads_file1[i].split(',')[1]):
                     pg.draw.line(screen , (0 , 0  , 0 ) , [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1])] , [ -camera.rect[ 0 ] + int(roads_file1[i].split(',')[2]) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[3])], 300 )
@@ -365,7 +372,7 @@ def start():
         for i in range(len(checkpoints_file1)) : pg.draw.circle(screen , (255 , 0 , 0 ) , (-camera.rect[0] + int(checkpoints_file1[i].split(',')[0]) + 50 , -camera.rect[1] + int(checkpoints_file1[i].split(',')[1]) + 180) , 50 , 1 )
         
         for i in range(len(custom_checkpoints_list_x)) :
-            pg.draw.circle(screen , (255 , 0 , 0)      , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) ) , 20  , 5 )
+            pg.draw.circle(screen , (255 , 0 , 0)      , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i])      ) , 20  , 5 )
             screen.blit(custom_checkpoint_title        , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
             mini_map_surf.blit(custom_checkpoint_title , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
 
