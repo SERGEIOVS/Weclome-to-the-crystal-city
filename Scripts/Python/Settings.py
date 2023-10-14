@@ -1,7 +1,7 @@
 import pygame as pg , datetime ; from Units import * ; from Items import * ; import os , math , logging ;import sys
 pg.init() ; pg.font.init()
 import tabulate ; from tabulate import tabulate
-import  getpass
+import  getpass;import pymysql
 
 #Game directory
 
@@ -55,6 +55,7 @@ hero_inventory    = [] ; hero_inventory_nums = [] ; hero_inventory_file_name = '
 prices_file_name = 'txt/Prices.txt' ; prices_file_mode = 'r' ; prices_file = open(prices_file_name , prices_file_mode , encoding= "utf-8") ; prices_file1 = prices_file.readlines()
 
 for i in range(len(resolutions_file1)) : i = big_font.render(resolutions_file1[i].strip() , False , small_font_color ) ; resolutions_list.append(i)
+
 for i in saves_file1 :
         if saving_type == 'Default' : screen_width , screen_height , camera_x , camera_y = i.split(',')[0] , i.split(',')[1] , i.split(',')[2] , i.split(',')[3]
         
@@ -103,9 +104,6 @@ camera = cam( 0 , 0 ) ; vector = [ 0 , 0 ]
 x_1_list =  -camera.rect[ 0 ] + int(camera_x) + int(screen_width) / 2 + hero_checkpoint_offset_x ; y_1_list =  -camera.rect[ 1 ] + int(camera_y) + int(screen_height) / 2 + 100 + hero_checkpoint_offset_y ; x_2_list =  -camera.rect[ 0 ] + int(checkpoints_file1[checkpoint_num ].split(',')[0]) ; y_2_list =  -camera.rect[ 1 ] + int(checkpoints_file1[checkpoint_num ].split(',')[1]) #checkpoint_x andd checkpoint_y
 distances = [] ; distance_num = 0 ; calc_dist = math.sqrt( (( x_2_list - x_1_list * hero_checkpoint_offset_x) ** 2) +  ((y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) // 100) ; show_distance  = small_font.render('Distance : ' + str(int(calc_dist) // 100) + ' m' , False , small_font_color ) ; blit_action = 0 ; blit_distance  = 1
 
-
-import pymysql
-
 host = "localhost"
 user = "root"
 password = ""
@@ -143,20 +141,6 @@ try:
         #     cursor.execute(insert_query)
         #     connection.commit()
         #
-        # with connection.cursor() as cursor:
-        #     insert_query = "INSERT INTO `users` (name, password, email) VALUES ('Oleg', '112233', 'olegan@mail.ru');"
-        #     cursor.execute(insert_query)
-        #     connection.commit()
-
-        # with connection.cursor() as cursor:
-        #     insert_query = "INSERT INTO `users` (name, password, email) VALUES ('Oleg', 'kjlsdhfjsd', 'ole2gan@mail.ru');"
-        #     cursor.execute(insert_query)
-        #     connection.commit()
-        #
-        # with connection.cursor() as cursor:
-        #     insert_query = "INSERT INTO `users` (name, password, email) VALUES ('Oleg', '889922', 'olegan3@mail.ru');"
-        #     cursor.execute(insert_query)
-        #     connection.commit()
 
         # update data
         # with connection.cursor() as cursor:

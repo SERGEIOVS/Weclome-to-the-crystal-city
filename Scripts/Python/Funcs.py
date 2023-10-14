@@ -68,7 +68,8 @@ Game_Author_x  = 10       ; Game_Author_y       = int(screen_height) - bigfont
 Game_created_date_x  = 10 ; Game_created_date_y = 10 
 Game_update_x  = 10       ; Game_update_y       = 10 
 
-back_btn = pg.K_ESCAPE ; save_game_btn = pg.K_F5 ; backpack_btn1 = pg.K_b ; backpack_btn2 = pg.K_b ; load_game_btn = pg.K_F3
+back_btn = pg.K_ESCAPE ; save_game_btn = pg.K_F5 ; backpack_btn1 = pg.K_b ; backpack_btn2 = pg.K_b ; load_game_btn = pg.K_F3 ; screenshot_btn = pg.K_F1
+reload_btn = pg.K_r
 
 change_settings_value = 0 ; fps_1 = 4 ; 
 herojump , herojumpcounter = False , 10 ; jump_height = 6 # you can not jump , jump height
