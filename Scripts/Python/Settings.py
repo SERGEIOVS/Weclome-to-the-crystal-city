@@ -59,27 +59,27 @@ for i in range(len(resolutions_file1)) : i = big_font.render(resolutions_file1[i
 for i in saves_file1 :
         if saving_type == 'Default' : screen_width , screen_height , camera_x , camera_y = i.split(',')[0] , i.split(',')[1] , i.split(',')[2] , i.split(',')[3]
         
-for i in range(len(saves_file1))           : i = big_font.render(saves_file1[0].split(',')[0] , False , small_font_color ) ; saves_list.append(i)
-for i in range(len(langs_file1))           : i = big_font.render(langs_file1[i].strip() , False , small_font_color ) ; langs_list.append(i)
-for i in range(len(dialoges_file1))        : i = small_font.render(dialoges_file1[i].strip() , False , small_font_color ) ; dialoges_list.append(i) 
-for i in range(len(actions_file1))         : i = small_font.render(str(actions_file1[i]).strip() , False , small_font_color ) ; actions_list.append(i)
-for i in range(len(actions_list))          : i = small_font.render(str(actions_list[i] ).strip() , False , small_font_color ) ; actions_list.append(i)
-for i in range(len(crafts_file1))          : i = big_font.render(crafts_file1[i].split(',')[0].strip() , False , small_font_color ) ; crafts_list.append(i)
-for i in range(len(quests_file1))          : i = small_font.render(quests_file1[i].split(',')[0].strip() , False , small_font_color ) ; quests_list.append(i)
-for i in range(len(main_menu_file1))       : i = big_font.render(main_menu_file1[i].strip() , False , small_font_color ) ; main_menu.append(i)
-for i in range(len(settings_file1 ))       : i = big_font.render(settings_file1[i].strip() , False , small_font_color ) ; settings.append(i)
-for i in range(len(Hero_types     ))       : i = big_font.render(Hero_types[i].strip() , False , small_font_color ) ; Hero_types_list.append(i)
-for i in range(len(nicknames_file1))       : i = small_font.render(players_file1[i].split(',')[2].strip() , False , small_font_color ) ; nicknameslist.append(i)
+for i in range(len(saves_file1))           : i = big_font.render(saves_file1[0].split(',')[0]                           , False , small_font_color ) ; saves_list.append(i)
+for i in range(len(langs_file1))           : i = big_font.render(langs_file1[i].strip()                                 , False , small_font_color ) ; langs_list.append(i)
+for i in range(len(dialoges_file1))        : i = small_font.render(dialoges_file1[i].strip()                            , False , small_font_color ) ; dialoges_list.append(i) 
+for i in range(len(actions_file1))         : i = small_font.render(str(actions_file1[i]).strip()                        , False , small_font_color ) ; actions_list.append(i)
+for i in range(len(actions_list))          : i = small_font.render(str(actions_list[i] ).strip()                        , False , small_font_color ) ; actions_list.append(i)
+for i in range(len(crafts_file1))          : i = big_font.render(crafts_file1[i].split(',')[0].strip()                  , False , small_font_color ) ; crafts_list.append(i)
+for i in range(len(quests_file1))          : i = small_font.render(quests_file1[i].split(',')[0].strip()                , False , small_font_color ) ; quests_list.append(i)
+for i in range(len(main_menu_file1))       : i = big_font.render(main_menu_file1[i].strip()                             , False , small_font_color ) ; main_menu.append(i)
+for i in range(len(settings_file1 ))       : i = big_font.render(settings_file1[i].strip()                              , False , small_font_color ) ; settings.append(i)
+for i in range(len(Hero_types     ))       : i = big_font.render(Hero_types[i].strip()                                  , False , small_font_color ) ; Hero_types_list.append(i)
+for i in range(len(nicknames_file1))       : i = small_font.render(players_file1[i].split(',')[2].strip()               , False , small_font_color ) ; nicknameslist.append(i)
 for i in range(len(hero_inventory_file1))  : i = big_font.render(hero_inventory_file1[i].split(',')[0].strip()          , False , small_font_color ) ; hero_inventory.append(i)     
 
 screen = pg.display.set_mode((int( screen_width) , int(screen_height))) ; game_icon = pg.display.set_icon(pg.image.load("Interface/icons/Game icons/Game_icon.png"))
-new_quest  = big_font.render('!'   , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-buy        = big_font.render('Buy' , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-x          = big_font.render('x'   , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-show_fuel          = big_font.render('Fuel  : ' + str(fuel)    , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-show_speed         = big_font.render('Speed : ' + str(hero_speed)    , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+new_quest  = big_font.render('!'   , False , small_font_color ) ; add = big_font.render('+' , False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+buy        = big_font.render('Buy' , False , small_font_color ) ; add = big_font.render('+' , False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+x          = big_font.render('x'   , False , small_font_color ) ; add = big_font.render('+' , False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+show_fuel          = big_font.render('Fuel  : ' + str(fuel)                                 , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+show_speed         = big_font.render('Speed : ' + str(hero_speed)                           , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
 
-custom_checkpoint_title1 = big_font.render('Custom checkpoint'    , False , small_font_color ) 
+custom_checkpoint_title1 = big_font.render('Custom checkpoint'                              , False , small_font_color ) 
 
 #measure units . linear measure . inch = 25,4 mm (2,54 см) foot = 0,3048 m (или 12 inches) ; 
 bg_num = 1 ; wallpapers_dir = os.listdir('wallpapers/' + str(screen_width) + '_' + str(screen_height) + '/') ; wallpaper = wallpapers_dir[bg_num] ; map_grid = 1 ; dark_level = 0 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; meter = 100 ; cm = 1 ; km = 1000 ; inch = 2.54 ; map_width , map_height = meter * km , meter * km ; map_scale = 1 ; map_size = 3 ; show_map = 1 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_islands = 0 
@@ -104,37 +104,50 @@ camera = cam( 0 , 0 ) ; vector = [ 0 , 0 ]
 x_1_list =  -camera.rect[ 0 ] + int(camera_x) + int(screen_width) / 2 + hero_checkpoint_offset_x ; y_1_list =  -camera.rect[ 1 ] + int(camera_y) + int(screen_height) / 2 + 100 + hero_checkpoint_offset_y ; x_2_list =  -camera.rect[ 0 ] + int(checkpoints_file1[checkpoint_num ].split(',')[0]) ; y_2_list =  -camera.rect[ 1 ] + int(checkpoints_file1[checkpoint_num ].split(',')[1]) #checkpoint_x andd checkpoint_y
 distances = [] ; distance_num = 0 ; calc_dist = math.sqrt( (( x_2_list - x_1_list * hero_checkpoint_offset_x) ** 2) +  ((y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) // 100) ; show_distance  = small_font.render('Distance : ' + str(int(calc_dist) // 100) + ' m' , False , small_font_color ) ; blit_action = 0 ; blit_distance  = 1
 
-host = "localhost"
-user = "root"
-password = ""
-db_name = "game"
-db_table_name = "units"
+host = "localhost" ; user = "root" ; password = "" ; db_name = "game" ; db_table_name = "units"
 
 try:
-    connection = pymysql.connect(
-        host = host , port = 3306 , user = user , password = password , database = db_name , cursorclass = pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host = host , port = 3306 , user = user , password = password , database = db_name , cursorclass = pymysql.cursors.DictCursor)
     print("successfully connected...")
     print()
     print()
 
     try:
-        # cursor = connection.cursor()
+        cursor = connection.cursor()
 
         # create table
-        # with connection.cursor() as cursor:
-        #     create_table_query = "CREATE TABLE `users`(id int AUTO_INCREMENT," \
-        #                          " name varchar(32)," \
-        #                          " password varchar(32)," \
-        #                          " email varchar(32), PRIMARY KEY (id));"
-        #     cursor.execute(create_table_query)
-        #     print("Table created successfully")
+        with connection.cursor() as cursor:
+             create_table_query = "CREATE TABLE if not exists `users`(id int AUTO_INCREMENT," \
+                                  " name varchar(32)," \
+                                  " password varchar(32)," \
+                                  " email varchar(32), PRIMARY KEY (id));"
+             cursor.execute(create_table_query)
+             print("Table created successfully")
 
         # insert data
         for i in range(len(Companions_file1)):
             with connection.cursor() as cursor:
-                insert_query = "INSERT INTO " + str(db_table_name) + " (x,y) VALUES (" + "'" + Companions_file1[i].split(',')[0]+ "','" + Companions_file1[i].split(',')[1] + "');"
+                insert_query = "INSERT INTO " + str(db_table_name) + " (x,y) VALUES (" + "'" + Companions_file1[i].split(',')[0] + "','" + Companions_file1[i].split(',')[1] + "' ) ; "
                 cursor.execute(insert_query)
                 connection.commit()
+
+        # select all data from table
+        with connection.cursor() as cursor:
+            select_all_rows = "SELECT * FROM `units` "
+            cursor.execute(select_all_rows)
+            # cursor.execute("SELECT * FROM `users`")
+            rows = cursor.fetchall()
+            for row in rows:
+                print(row)
+            print()
+            print()
+
+    finally:
+        connection.close()
+
+except Exception as ex:
+    print("Connection refused...")
+    print(ex)
 
         # with connection.cursor() as cursor:
         #     insert_query = "INSERT INTO `users` (name, password, email) VALUES ('Victor', '123456', 'victor@gmail.com');"
@@ -158,21 +171,3 @@ try:
         # with connection.cursor() as cursor:
         #     drop_table_query = "DROP TABLE `users`;"
         #     cursor.execute(drop_table_query)
-
-        # select all data from table
-        with connection.cursor() as cursor:
-            select_all_rows = "SELECT * FROM `units` "
-            cursor.execute(select_all_rows)
-            # cursor.execute("SELECT * FROM `users`")
-            rows = cursor.fetchall()
-            for row in rows:
-                print(row)
-            print()
-            print()
-
-    finally:
-        connection.close()
-
-except Exception as ex:
-    print("Connection refused...")
-    print(ex)
