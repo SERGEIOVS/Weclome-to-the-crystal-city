@@ -408,6 +408,12 @@ def start():
                 if camera.rect[0] + int(screen_width) - fov >= int(items_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(items_file1[i].split(',')[1]):
                     screen.blit( items_images[ i ] , ( -camera.rect[ 0 ] + int(items_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Furniture_file1[i].split(',')[1] ) ) )
         
+        
+        for i in range(len(Plants_file1)) :
+                if camera.rect[0] + int(screen_width) - fov >= int(Plants_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(Plants_file1[i].split(',')[1]):
+                    screen.blit( Plants_file1[ i ] , ( -camera.rect[ 0 ] + int(Plants_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Plants_file1[i].split(',')[1] ) ) )
+        
+
         inteface_surf.set_alpha(50) ; quests_surf.set_colorkey(( 0 , 0 , 0 ))
         screen.blit( hero_image , ( hero_x , hero_y ) )
 

@@ -3,6 +3,7 @@ from PIL import Image
 import os
 from Settings import *
 import math
+import pygame as pg , os ; from Settings import * ;
 
 class Background:
     def __init__(self , x , y , image) :
@@ -49,7 +50,7 @@ Plants_file  = open (buildings_file_name , buildings_file_mode)
 Plants_file1 = buildings_file.readlines()
 
 Plants_images_list = []
-Plants_types = os.listdir('Objects/Background/Buildings/')
+Plants_types = os.listdir('Objects/Background/Plants/')
 Plants_categories  = []
 
 class Plants:
@@ -64,8 +65,8 @@ for i in range( len ( Plants_file1 ) ) :
     i = Plants(Plants_file1[i].split(',')[0] , Plants_file1[i].split(',')[1] , Plants_images_list[i] , Plants_types[i])
     Plants_list.append(i)
 
-    import pygame as pg , os ; from Settings import * ;
-from PIL import Image
+
+
 saving_type = 'Default' ; game_state = 'Main menu'
 
 Furniture_types = os.listdir('Objects/Background/Furniture/')
