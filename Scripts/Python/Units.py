@@ -69,7 +69,6 @@ for i in range( len ( Companions_file1 ) ) :
 
 class Players:
     def __init__( self ,x,y,image) :
-        #Companions_class_values[i]
         self.x         = x
         self.y         = y    
         self.image     = image
