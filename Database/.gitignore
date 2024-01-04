@@ -1,0 +1,4 @@
+# Project exclude paths
+/venvMYSQL/
+.idea/
+*.pyc

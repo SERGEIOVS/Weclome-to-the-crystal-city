@@ -1,0 +1,7 @@
+talk to the villager,0
+find a key,1
+collect the keys,1
+check the room,1
+protect the village,0
+give a key,0
+explore the house,0
