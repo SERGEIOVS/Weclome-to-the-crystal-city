@@ -1,10 +1,6 @@
 import pygame as pg , datetime ; from Units import * ; from Items import * ; import os , math , logging ;import sys
 pg.init() ; pg.font.init()
-<<<<<<< HEAD
 #import tabulate ; from tabulate import tabulate
-=======
-import tabulate ; from tabulate import tabulate
->>>>>>> 560445476851becc5f100c2dc297ec1e07e3c861
 import  getpass;import pymysql
 
 #Game directory
@@ -60,8 +56,7 @@ prices_file_name = 'txt/Prices.txt' ; prices_file_mode = 'r' ; prices_file = ope
 
 for i in range(len(resolutions_file1)) : i = big_font.render(resolutions_file1[i].strip() , False , small_font_color ) ; resolutions_list.append(i)
 
-for i in saves_file1 :
-        if saving_type == 'Default' : screen_width , screen_height , camera_x , camera_y = i.split(',')[0] , i.split(',')[1] , i.split(',')[2] , i.split(',')[3]
+for i in saves_file1 : screen_width , screen_height , camera_x , camera_y = i.split(',')[0] , i.split(',')[1] , i.split(',')[2] , i.split(',')[3]
         
 for i in range(len(saves_file1))           : i = big_font.render(saves_file1[0].split(',')[0]                           , False , small_font_color ) ; saves_list.append(i)
 for i in range(len(langs_file1))           : i = big_font.render(langs_file1[i].strip()                                 , False , small_font_color ) ; langs_list.append(i)

@@ -1,7 +1,0 @@
-Graphics
-Sound
-Controls
-Language
-Character
-Difficulty
-Cancel

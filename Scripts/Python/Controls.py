@@ -61,8 +61,8 @@ def draw_mini_map():
         
         for i in range( len ( vihicles_file1 ) ) : pg.draw.rect(mini_map_surf , (0 , 0 , 0) , (int(vihicles_file1[i].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset , int(vihicles_file1[i].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1 , 5 / map_scale , 3 / map_scale ))
         
-        for i in range( len ( items_file1 ) ) :
-             if show_items == 1 : pg.draw.rect(mini_map_surf , (0 , 255 , 0)  , (int(items_file1[i].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset , int(items_file1[i].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1, 1 / map_scale , 1 / map_scale ))
+        #for i in range( len ( items_file1 ) ) :
+        #     if show_items == 1 : pg.draw.rect(mini_map_surf , (0 , 255 , 0)  , (int(items_file1[i].split(',')[0]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset , int(items_file1[i].split(',')[1]) / (100 * map_scale) + minimap_border_offset * minimap_object_offset1, 1 / map_scale , 1 / map_scale ))
         
         hero_marker = pg.draw.circle(mini_map_surf , ( 255 , 100 , 0 )        , ( minimap_border_offset + camera.rect[0] / (100 * map_scale) + minimap_border_offset * minimap_object_offset ,  camera.rect[1] / (100 * map_scale) + minimap_border_offset * minimap_object_offset1  ) , 1 / map_scale )        
         
@@ -403,11 +403,11 @@ def start():
             for y in range(int(Furniture_file1[i].split(',')[2])):
                 if camera.rect[0] + int(screen_width) - fov >= int(Furniture_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(Furniture_file1[i].split(',')[1]):
                     screen.blit( Furniture_images_list[ i ] , ( -camera.rect[ 0 ] + int(Furniture_file1[i].split(',')[0]) + int(Furniture_file1[i].split(',')[2]) * y * 10  , -camera.rect[ 1 ] + int(Furniture_file1[i].split(',')[1] ) ) )
-        
+        """        
         for i in range(len(items_file1)) :
                 if camera.rect[0] + int(screen_width) - fov >= int(items_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(items_file1[i].split(',')[1]):
                     screen.blit( items_images[ i ] , ( -camera.rect[ 0 ] + int(items_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Furniture_file1[i].split(',')[1] ) ) )
-        
+        """
         
         for i in range(len(Plants_file1)) :
                 if camera.rect[0] + int(screen_width) - fov >= int(Plants_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(Plants_file1[i].split(',')[1]):
@@ -417,7 +417,6 @@ def start():
         inteface_surf.set_alpha(50) ; quests_surf.set_colorkey(( 0 , 0 , 0 ))
         screen.blit( hero_image , ( hero_x , hero_y ) )
 
-<<<<<<< HEAD
         fog                  = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
         acid_cloud           = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
         water_bubbles        = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
@@ -431,22 +430,7 @@ def start():
         dialoge_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         blood_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         paranormal_effect    = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        research_complete = 0
-=======
-        fog             = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-        acid_cloud      = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-        water_bubbles   = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        burst           = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        new_skill       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        damage_effect   = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        heal_effect     = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        death_effect    = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        research_effect = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        loading_effect  = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        dialoge_effect  = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        blood_effect    = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-
->>>>>>> 560445476851becc5f100c2dc297ec1e07e3c861
+        research_complete    = 0
 
         if show_interface == 1:
             for i in range(len(hero_inventory_file1)):
@@ -479,7 +463,7 @@ def start():
                 
                 pg.draw.line(  screen , (0 , 255 , 0) , (400 , 400) , ( 400 + fuel_bar_width * -math.cos(fuel) , 400 + fuel_bar_width * -math.sin(-fuel)) , 1)
                 screen.blit(show_fuel , ( 0 , int(screen_height ) - 250))
-                fuel_values = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+                fuel_values = pg.draw.circle(screen , (255 , 0 , 0)  , ( 100 , 600 , checkpoint_size , 1 ))
 
                 screen.blit( cancel_icon , ( cancel_icon_x,cancel_icon_y))
 
@@ -493,7 +477,7 @@ def start():
 
             if blit_distance == 1 and map_size == min_map_size : screen.blit(show_distance  , ( hero_x , hero_y - bigfont ) )
 
-            for i in range(len(hero_belt_inventory_images)) : screen.blit( hero_belt_inventory_images[i] , ( int(screen_width) / 2 - cell_size * i + 10  + cell_size , int(screen_height) - cell_size / 2 - items_images[i].get_height() / 2 ) )
+            #for i in range(len(hero_belt_inventory_images)) : screen.blit( hero_belt_inventory_images[i] , ( int(screen_width) / 2 - cell_size * i + 10  + cell_size , int(screen_height) - cell_size / 2 - items_images[i].get_height() / 2 ) )
 
 run = True ; logging.info( msg = 'GAME STARTED!' )
 multiplayer = 0
@@ -537,7 +521,7 @@ while run :
                 if event.button == 3 and  pos[0] >=  -camera.rect[0] + int(vihicles_file1[i].split(',')[0])  and pos[0] <=  -camera.rect[0] + int(vihicles_file1[i].split(',')[0]) + vihicles_images_list[i].get_width() and pos[1] >=  -camera.rect[1] + int(vihicles_file1[i].split(',')[1]) and pos[1] <=  -camera.rect[1] + int(vihicles_file1[i].split(',')[1]) + vihicles_images_list[i].get_height() and vihicle_sit == 0:
                     vihicle_sit = 1 ; camera.rect[0] = int(vihicles_file1[i].split(',')[0]) - int(screen_width) / 2 ; camera.rect[1] = int(vihicles_file1[i].split(',')[1]) - int(screen_height) / 2 ; hero_image = vihicles_images_list[i]
             
-
+            """
             for i in range(len(items_file1)):
                 if event.button == 3 and  pos[0] >=  -camera.rect[0] + int(items_file1[i].split(',')[0]) and pos[0] <=  -camera.rect[0] + int(items_file1[i].split(',')[0]) + items_images[i].get_width() \
                     and pos[1] >=  -camera.rect[1] + int(items_file1[i].split(',')[1]) and pos[1] <=  -camera.rect[1] + int(items_file1[i].split(',')[1]) + items_images[i].get_height():
@@ -545,6 +529,7 @@ while run :
 
                     if pickup_sound_num >= 0 and pickup_sound_num <= len(pickup_sounds_dir) - 1 and len(hero_belt_inventory_images) - 1 <= items_max:
                         pickup_sound.play() ; pickup_sound_num += 0.5 ; pickup_sound = pg.mixer.Sound('Audio/sounds/pickup/' + str(int(pickup_sound_num)) + '.mp3')
+            """
 
                     
             #button 4 or 5 = mouse_wheel_scrolling button 1 = left mouse button button 3 = right mouse button 

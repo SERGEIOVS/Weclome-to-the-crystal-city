@@ -1,5 +1,0 @@
-2312,3568,checkpoint_1
-2100,3400,checkpoint_2
-2312,3568,checkpoint_3
-2100,3400,checkpoint_4
-2100,3400,checkpoint_5

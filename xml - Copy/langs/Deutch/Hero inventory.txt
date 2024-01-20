@@ -1,4 +1,0 @@
-pistol
-medkit
-knife
-flashlight
