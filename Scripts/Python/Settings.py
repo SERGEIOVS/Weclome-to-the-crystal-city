@@ -7,7 +7,7 @@ import  getpass;import pymysql
 
 cwd = os.getcwd()
 d1 =  datetime.datetime.today() ; d1 += datetime.timedelta( hours = 0 ) ; pos = pg.mouse.get_pos()
-
+mods_dir_path = 'mods'
 saving_type = 'Default' ; game_state = 'Main menu'
 
 Game_title = os.path.basename(cwd) ; Game_version = d1.date() ; update_name  = 'Fear in the dark' ; author = 'Thunderman98' ; subtitles = 0 ; cursor_x = pos[0] ; cursor_y = pos[1] ; pg.display.set_caption(Game_title)
@@ -24,7 +24,8 @@ mags       = 3
 map_scale  = 1 ; map_size = 3 ; show_map = 0 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; unit_moving = 1 ; unit_speed = 0 ; unit_speed1 = 0 ; max_unit_speed = 4
 bg_num     = 1 ; wallpapers_dir = os.listdir('Wallpapers/' + str(screen_width) + '_' + str(screen_height) + '/') ; wallpaper  = wallpapers_dir[bg_num]
 dark_level = 0 ; max_dark_level  = 100 ; volume_levels = 10 ; settings_values = 5
-fuel = 0
+fuel       = 0
+gas        = 0
 Colors_Coords_x_1 = [] ; Colors_Coords_y_1 = [] ; Colors_Coords_x_2 = [] ; Colors_Coords_y_2 = []
 cell_size = 50
 cells = 6
@@ -77,8 +78,11 @@ buy        = big_font.render('Buy' , False , small_font_color ) ; add = big_font
 x          = big_font.render('x'   , False , small_font_color ) ; add = big_font.render('+' , False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
 show_fuel          = big_font.render('Fuel  : ' + str(fuel)                                 , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
 show_speed         = big_font.render('Speed : ' + str(hero_speed)                           , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-
+show_gas          = big_font.render('Gas  : ' + str(gas), False , small_font_color )
 custom_checkpoint_title1 = big_font.render('Custom checkpoint'                              , False , small_font_color ) 
+
+
+show_mods_count = big_font.render(str(len(os.listdir(mods_dir_path))) , False , small_font_color ) 
 
 #measure units . linear measure . inch = 25,4 mm (2,54 см) foot = 0,3048 m (или 12 inches) ; 
 bg_num = 1 ; wallpapers_dir = os.listdir('wallpapers/' + str(screen_width) + '_' + str(screen_height) + '/') ; wallpaper = wallpapers_dir[bg_num] ; map_grid = 1 ; dark_level = 0 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; meter = 100 ; cm = 1 ; km = 1000 ; inch = 2.54 ; map_width , map_height = meter * km , meter * km ; map_scale = 1 ; map_size = 3 ; show_map = 1 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_islands = 0 
@@ -102,8 +106,8 @@ camera = cam( 0 , 0 ) ; vector = [ 0 , 0 ]
 #hero_x and hero_y
 x_1_list =  -camera.rect[ 0 ] + int(camera_x) + int(screen_width) / 2 + hero_checkpoint_offset_x ; y_1_list =  -camera.rect[ 1 ] + int(camera_y) + int(screen_height) / 2 + 100 + hero_checkpoint_offset_y ; x_2_list =  -camera.rect[ 0 ] + int(checkpoints_file1[checkpoint_num ].split(',')[0]) ; y_2_list =  -camera.rect[ 1 ] + int(checkpoints_file1[checkpoint_num ].split(',')[1]) #checkpoint_x andd checkpoint_y
 distances = [] ; distance_num = 0 ; calc_dist = math.sqrt( (( x_2_list - x_1_list * hero_checkpoint_offset_x) ** 2) +  ((y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) // 100) ; show_distance  = small_font.render('Distance : ' + str(int(calc_dist) // 100) + ' m' , False , small_font_color ) ; blit_action = 0 ; blit_distance  = 1
-
-host = "localhost" ; user = "root" ; password = "" ; db_name = "game" ; db_table_name = "units"
+db_user = "root"
+host = "localhost" ; user = db_user ; password = "" ; db_name = "game" ; db_table_name = "units"
 try:
     connection = pymysql.connect(host = host , port = 3306 , user = user , password = password , database = db_name , cursorclass = pymysql.cursors.DictCursor)
     print("successfully connected...") ; print() ; print()

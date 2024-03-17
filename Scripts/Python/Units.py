@@ -18,7 +18,7 @@ armor  , max_armor          = int(hero_file1[0].split(',')[1]) , int(hero_file1[
 radiation , max_radiation   = int(hero_file1[0].split(',')[2]) , int(hero_file1[0].split(',')[2])
 energy , max_energy         = int(hero_file1[0].split(',')[3]) , int(hero_file1[0].split(',')[3]) 
 hero_damage = 5
-pistol_mags , max_pistol_mags = 3 , 3 ; pistol_ammo , pistol_max_ammo  = int(hero_file1[0].split(',')[4]) , int(hero_file1[0].split(',')[4]) ; mags = pistol_mags ; ammo , max_ammo   = pistol_ammo , pistol_max_ammo
+pistol_mags , max_pistol_mags = 3 , 3 ; pistol_ammo , pistol_max_ammo  = int(hero_file1[0].split(',')[4]) , int(hero_file1[0].split(',')[4]) ; mags = pistol_mags ; ammo , max_ammo = pistol_ammo , pistol_max_ammo
 
 hero_night_vision   = 0
 hero_skills         = [ 'fast run' , 'night vision']
@@ -55,7 +55,7 @@ Companion_types = os.listdir('Objects/Characters/Companions/') ;
 Companion_animation = 0 ; 
 Companions_images_list   = [] ; 
 Companions_routes = [] ; 
-Companion_welcome_speech = [] ; 
+Companion__speech = [] ; 
 Companions_list = []
 Companions_inventory = []
 
@@ -83,7 +83,7 @@ player_types         = os.listdir('Objects/Characters/Players/') ;
 player_animation     = 0 ; 
 players_images_list  = [] ; 
 Players_routes       = [] ; 
-Players_welcome_speech   = [] ; 
+Players_speech   = [] ; 
 players_list         = []
 players_inventory    = []
 
@@ -107,7 +107,7 @@ Enemies_file1      =  Enemies_file.readlines()
 enemy_state        = 'idle' ; enemy_turn     = 'left'
 enemy_types        = os.listdir('Objects/Characters/Enemies/')
 Enemy_animation    = 0  ; Enemies_images_list  = []
-Enemies_routes     = [] ; Enemy_welcome_speech = []
+Enemies_routes     = [] ; Enemy_speech = []
 Enemies_list       = []
 Enemies_inventory  = []
 

@@ -1,0 +1,4 @@
+Peaceful
+Easy
+Normal
+Hard
