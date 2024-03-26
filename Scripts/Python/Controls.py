@@ -37,7 +37,7 @@ necessary_craft_items = [] ; prices_list  = [] ; prices_list1 = []
 for i in range(len(prices_file1)) : prices_list.append(prices_file1[i])
 for i in range(len(prices_list))  : i = big_font.render('Price : ' + prices_file1[i].strip() , False , small_font_color ) ; prices_list1.append(i)     
 
-interface_surf_x   = 0   ; interface_surf_y    = int(screen_height ) - inteface_surf.get_width() 
+interface_surf_x   = 0   ; interface_surf_y    = int(screen_height ) - interface_surf.get_width() 
 minimap_grid_width = 100 ; minimap_grid_height = 100 ; min_map_size = 3 ; max_map_size = 1.2 ; mini_map_grid_cell_size = meter * map_scale
 
 cursor_types = ['Default' , 'Custom']
@@ -285,15 +285,15 @@ def toggle_main_menu():
     if game_state == 'Main menu':
         draw_menu()
         for i in range(len(main_menu_file1)):
-            Button = pg.draw.rect(screen , (Button_color) , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
+            Button = pg.draw.rect(screen , (Button_color) , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
             screen.blit(main_menu[i]                      , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont ))
             pg.draw.rect(screen , (Button_frame_color)    , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + active_button * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)
             len(os.listdir(mods_dir_path))
-        screen.blit(show_mods_count                   , (int(screen_width) /  2 - button_width / 2 - 100 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 3 * 40 + bigfont / 2 , button_width , bigfont ))
+        screen.blit(show_mods_count                   , (int(screen_width) /  2 - button_width / 2 + 75 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 3 * 40 + bigfont / 2 , button_width , bigfont ))
 
 
 
-def text_updating():
+def text_updating(): 
     global new_craft,new_quest,checkpoints_list,achievements_list,hero_inventory_nums,show_game_state,ok,apply,cancel,action_counter,checkpoints_file1,dialoge_started,achievements_file1,checkpoint_size,dialoge_num,action,checkpoint_num
 
     lang_num = active_button1 ; language = languages[lang_num]
@@ -361,7 +361,7 @@ def start():
             for i in range( len ( islands_file1 ) ) : 
                 for y in range( len ( islands_file1 ) ) : 
                     if camera.rect[0] + int(screen_width) - fov >= int(islands_file1[i].split(',')[0]) + y * int(islands_file1[i].split(',')[2])  and camera.rect[1] + int(screen_height) - fov >= int(islands_file1[i].split(',')[1]):
-                        screen.blit( islands_images[ i ] , ( -camera.rect[ 0 ] +  Sea_width + int(islands_file1[i].split(',')[0]) + i * int(islands_file1[i].split(',')[2]) ,  -camera.rect[ 1 ] +  Sea_width + int(islands_file1[i].split(',')[1]) + y * int(islands_file1[i].split(',')[2])    ) )
+                        screen.blit( islands_images[ i ] , ( -camera.rect[ 0 ] +  Sea_width + int(islands_file1[i].split(',')[0]) + i * int(islands_file1[i].split(',')[2]) , -camera.rect[ 1 ] +  Sea_width + int(islands_file1[i].split(',')[1]) + y * int(islands_file1[i].split(',')[2])) )
             
             world_border = pg.draw.rect(screen , (Button_frame_color) , ( -camera.rect[ 0 ] + 0 ,-camera.rect[ 1 ] + 0 , map_width , map_width) , 100 , 0  )
 
@@ -376,7 +376,11 @@ def start():
             for i in range( len( buildings_file1 )) : 
                  if camera.rect[0] + int(screen_width) - fov >= int(buildings_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(buildings_file1[i].split(',')[1]):
                     screen.blit( Buildings_images_list[i] , ( -camera.rect[ 0 ] + int(buildings_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(buildings_file1[ i ].split(',')[1] ) ))
-        
+                    
+                    pg.draw.line(  screen , (0 , 255 , 0) , (-camera.rect[ 0 ] + int(buildings_file1[i].split(',')[0])  ,-camera.rect[ 1 ] + int(buildings_file1[i].split(',')[1]) ) , ( -camera.rect[ 0 ] + int(buildings_file1[i].split(',')[0])  + fuel_bar_width * -math.cos(fuel) , -camera.rect[ 1 ] + int(buildings_file1[i].split(',')[1])  + fuel_bar_width * -math.sin(-fuel)) , 2)
+
+
+
         for i in range(len(checkpoints_file1)) : pg.draw.circle(screen , (255 , 0 , 0 ) , (-camera.rect[0] + int(checkpoints_file1[i].split(',')[0]) + 50 , -camera.rect[1] + int(checkpoints_file1[i].split(',')[1]) + 180) , 50 , 1 )
         
         for i in range(len(custom_checkpoints_list_x)) :
@@ -421,7 +425,7 @@ def start():
                     screen.blit( Plants_file1[ i ] , ( -camera.rect[ 0 ] + int(Plants_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Plants_file1[i].split(',')[1] ) ) )
         
 
-        inteface_surf.set_alpha(50) ; quests_surf.set_colorkey(( 0 , 0 , 0 ))
+        interface_surf.set_alpha(50) ; quests_surf.set_colorkey(( 0 , 0 , 0 ))
         screen.blit( hero_image , ( hero_x , hero_y ) )
 
         fog                  = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
@@ -448,8 +452,8 @@ def start():
     
             dark_surf.fill(dark_surf_color) ; dialoge_surf.fill((0 , 0 , 0 )) ; dark_surf.set_alpha(dark_level)
             screen.blit(dark_surf     , ( 0 , 0 )) 
-            screen.blit(inteface_surf , ( interface_surf_x , interface_surf_y ))
-            screen.blit(quests_surf   , ( int(screen_width) - 200 , int(screen_height ) - 200 ))
+            screen.blit(interface_surf , ( interface_surf_x , interface_surf_y ))
+            screen.blit(quests_surf   , ( int(screen_width) - interface_surf.get_width() , int(screen_height ) - interface_surf.get_height() ))
             quests_surf.fill((quest_surf_color))
                 
             #drawing a road to the checkpoint
@@ -474,14 +478,12 @@ def start():
 
                 screen.blit( cancel_icon , ( cancel_icon_x,cancel_icon_y))
             
-
-            
-            screen.blit(show_health     , ( bigfont , int(screen_height ) - bigfont * 6)) , screen.blit(health_icon     , ( 0 , int(screen_height ) - bigfont * 6))
-            screen.blit(show_hero_armor , ( bigfont , int(screen_height ) - bigfont * 5)) , screen.blit(armor_icon      , ( 0 , int(screen_height ) - bigfont * 5))
-            screen.blit(show_ammo       , ( bigfont , int(screen_height ) - bigfont * 4)) , screen.blit(ammo_icon       , ( 0 , int(screen_height ) - bigfont * 4))
-            screen.blit(show_radiation  , ( bigfont , int(screen_height ) - bigfont * 3)) , screen.blit(radiation_icon  , ( 0 , int(screen_height ) - bigfont * 3))
-            screen.blit(show_energy     , ( bigfont , int(screen_height ) - bigfont * 2)) , screen.blit(energy_icon     , ( 0 , int(screen_height ) - bigfont * 2))
-            screen.blit(show_money      , ( 0       , int(screen_height ) - bigfont))
+            screen.blit(show_health     , ( bigfont + 10 , int(screen_height ) - bigfont * 6)) , screen.blit(health_icon     , ( 10 , int(screen_height ) - bigfont * 6))
+            screen.blit(show_hero_armor , ( bigfont + 10 , int(screen_height ) - bigfont * 5)) , screen.blit(armor_icon      , ( 10 , int(screen_height ) - bigfont * 5))
+            screen.blit(show_ammo       , ( bigfont + 10 , int(screen_height ) - bigfont * 4)) , screen.blit(ammo_icon       , ( 10 , int(screen_height ) - bigfont * 4))
+            screen.blit(show_radiation  , ( bigfont + 10 , int(screen_height ) - bigfont * 3)) , screen.blit(radiation_icon  , ( 10 , int(screen_height ) - bigfont * 3))
+            screen.blit(show_energy     , ( bigfont + 10 , int(screen_height ) - bigfont * 2)) , screen.blit(energy_icon     , ( 10 , int(screen_height ) - bigfont * 2))
+            screen.blit(show_money      , ( 10       , int(screen_height ) - bigfont))
 
             if blit_distance == 1 and map_size == min_map_size : screen.blit(show_distance  , ( hero_x , hero_y - bigfont ) )
 

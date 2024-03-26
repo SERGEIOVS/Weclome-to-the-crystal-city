@@ -82,15 +82,15 @@ show_gas          = big_font.render('Gas  : ' + str(gas), False , small_font_col
 custom_checkpoint_title1 = big_font.render('Custom checkpoint'                              , False , small_font_color ) 
 
 
-show_mods_count = big_font.render(str(len(os.listdir(mods_dir_path))) , False , small_font_color ) 
+show_mods_count = big_font.render("(" + str(len(os.listdir(mods_dir_path))) + ")" , False , small_font_color ) 
 
 #measure units . linear measure . inch = 25,4 mm (2,54 см) foot = 0,3048 m (или 12 inches) ; 
 bg_num = 1 ; wallpapers_dir = os.listdir('wallpapers/' + str(screen_width) + '_' + str(screen_height) + '/') ; wallpaper = wallpapers_dir[bg_num] ; map_grid = 1 ; dark_level = 0 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; meter = 100 ; cm = 1 ; km = 1000 ; inch = 2.54 ; map_width , map_height = meter * km , meter * km ; map_scale = 1 ; map_size = 3 ; show_map = 1 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_islands = 0 
 
 #surfs
-checkpoints_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; mini_map_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; quests_surf = pg.Surface(( 200 , 200 )) ; dark_surf = pg.Surface(( int(screen_width) , int(screen_height) )) ; inteface_surf = pg.Surface(( 200 , 200 )) ; dark_surf_color = ((0 , 0 , 0)) ; quest_surf_color = colors[1]
+checkpoints_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; mini_map_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; quests_surf = pg.Surface(( 200 , 200 )) ; dark_surf = pg.Surface(( int(screen_width) , int(screen_height) )) ; interface_surf = pg.Surface(( 200 , 200 )) ; dark_surf_color = ((0 , 0 , 0)) ; quest_surf_color = colors[1]
 dialoge_surf = pg.Surface((  100 , bigfont * len(actions_list) - bigfont))
-show_game_title = big_font.render(str(Game_title) , False , big_font_color) ; show_game_version = small_font.render('Version : ' + str(Game_version) , False , small_font_color) ; show_update = small_font.render(str(update_name) , False , small_font_color) ; show_game_state = big_font.render(str(game_state) , False , small_font_color) ; show_author = small_font.render('Author : ' + str(author) , False , small_font_color) ; show_created_date = small_font.render('Created : 25 oktober 2019' , False , small_font_color) ; show_money = small_font.render('Money : ' + str(hero_money) , False , ( 250 , 0 , 0 ) ) ; show_action = big_font.render(str(action) , False , ( 250 , 0 , 0 ) ) ; show_action1 = big_font.render('Trade' , False , ( 250 , 0 , 0 ) ) ; show_action2 = big_font.render('Repair' , False , ( 250 , 0 , 0 ))
+show_game_title = big_font.render(str(Game_title) , False , big_font_color) ; show_game_version = small_font.render('Version : ' + str(Game_version) , False , small_font_color) ; show_update = small_font.render(str(update_name) , False , small_font_color) ; show_game_state = big_font.render(str(game_state) , False , small_font_color) ; show_author = small_font.render('Author : ' + str(author) , False , small_font_color) ; show_created_date = small_font.render('Created : 25 oktober 2019' , False , small_font_color) ; show_money = small_font.render('$ : ' + str(hero_money) , False , ( 250 , 0 , 0 ) ) ; show_action = big_font.render(str(action) , False , ( 250 , 0 , 0 ) ) ; show_action1 = big_font.render('Trade' , False , ( 250 , 0 , 0 ) ) ; show_action2 = big_font.render('Repair' , False , ( 250 , 0 , 0 ))
 hero_checkpoint_offset_x = 0 ; hero_checkpoint_offset_y = 0 ; toggle_checkpoints = 1
 
 minimap_location    =  'right_up'  ; minimap_x = 15 / 2 ; minimap_y = 15 / 2
