@@ -1,9 +1,8 @@
-import sys,os
+import sys , os
 mods_dir_path = 'mods'
 if mods_dir_path not in sys.path : sys.path.append(mods_dir_path)
 if mods_dir_path in sys.path : print() ; print() ; print('mods folder added ! ')
 print(os.listdir(mods_dir_path))
-
 
 import os
 import pygame as pg ; from Settings import * ; from PIL import Image ; from Units import * ; import logging ; from Vihicles import * ; import pyautogui ;
@@ -379,10 +378,9 @@ def start():
                     
                     pg.draw.line(  screen , (0 , 255 , 0) , (-camera.rect[ 0 ] + int(buildings_file1[i].split(',')[0])  ,-camera.rect[ 1 ] + int(buildings_file1[i].split(',')[1]) ) , ( -camera.rect[ 0 ] + int(buildings_file1[i].split(',')[0])  + fuel_bar_width * -math.cos(fuel) , -camera.rect[ 1 ] + int(buildings_file1[i].split(',')[1])  + fuel_bar_width * -math.sin(-fuel)) , 2)
 
-
-
         for i in range(len(checkpoints_file1)) : pg.draw.circle(screen , (255 , 0 , 0 ) , (-camera.rect[0] + int(checkpoints_file1[i].split(',')[0]) + 50 , -camera.rect[1] + int(checkpoints_file1[i].split(',')[1]) + 180) , 50 , 1 )
-        
+        pg.draw.circle(screen , (0 , 0 , 0)  , ( -camera.rect[0] + int(screen_width) / 2 , -camera.rect[1] + int(screen_height) / 2  ) , 200)
+
         for i in range(len(custom_checkpoints_list_x)) :
             pg.draw.circle(screen , (255 , 0 , 0)      , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i])      ) , 20  , 5 )
             screen.blit(custom_checkpoint_title        , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
@@ -392,7 +390,7 @@ def start():
              if camera.rect[0] + int(screen_width) - fov >= int(Companions_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(Companions_file1[i].split(',')[1]):
                 screen.blit( Companions_images_list[i]  , ( -camera.rect[ 0 ] + int(Companions_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Companions_file1[i].split(',')[1])  ) )
         
-        if multiplayer == 1 : 
+        if multiplayer == 1 and len(players_file1) != 0: 
             for i in range(len(players_file1)):
                 if hide_nicknames == 0 and camera.rect[0] + int(screen_width) - fov >= int(players_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(players_file1[i].split(',')[1]):
                     pg.draw.rect(screen , (45 , 45 , 45) , ( -camera.rect[ 0 ] + int(players_file1[i].split(',')[0]) + bigfont , -camera.rect[ 1 ] + int(players_file1[i].split(',')[1]) - 20 , len(nicknames_file1[i]) * len(nicknames_file1[i]) - len(nicknames_file1[i]) , smallfont))
@@ -409,7 +407,8 @@ def start():
                 and int(Enemies_file1[i].split(',')[1]) >= camera.rect[1] + fov and  int(Enemies_file1[i].split(',')[1]) <= camera.rect[1] + int(screen_height) - fov and Enemy_image not in killed_units and difficulty != 'Peaceful' : screen.blit( Enemy_image , ( -camera.rect[ 0 ] + int(Enemies_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Enemies_file1[i].split(',')[1])  ) )
         
         #drawing a text for a quests menu
-        for i in range(len(quests_file1)) : quests_surf.blit(quests_list[i] , (5 , 5 + bigfont / 2 * i * 1.6 ) ) ; #screen.blit(show_quests_num , (int(screen_width ) - int(screen_width) /3  , int(screen_height ) - int(screen_height) /3 - bigfont ) )
+        if len(quests_file1) != 0:
+            for i in range(len(quests_file1)) : quests_surf.blit(quests_list[i] , (5 , 5 + bigfont / 2 * i * 1.6 ) ) ; #screen.blit(show_quests_num , (int(screen_width ) - int(screen_width) /3  , int(screen_height ) - int(screen_height) /3 - bigfont ) )
 
         for i in range(len(Furniture_file1)) :
             for y in range(int(Furniture_file1[i].split(',')[2])):
@@ -423,16 +422,14 @@ def start():
         for i in range(len(Plants_file1)) :
                 if camera.rect[0] + int(screen_width) - fov >= int(Plants_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(Plants_file1[i].split(',')[1]):
                     screen.blit( Plants_file1[ i ] , ( -camera.rect[ 0 ] + int(Plants_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(Plants_file1[i].split(',')[1] ) ) )
-        
 
         interface_surf.set_alpha(50) ; quests_surf.set_colorkey(( 0 , 0 , 0 ))
         screen.blit( hero_image , ( hero_x , hero_y ) )
 
         fog                  = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
         acid_cloud           = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-        water_bubbles        = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #water_bubbles
         burst                = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        new_skill_effect     = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         damage_effect        = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         heal_effect          = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         death_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
@@ -440,8 +437,9 @@ def start():
         loading_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         dialoge_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         blood_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        paranormal_effect    = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         research_complete    = 0
+
+
 
         if show_interface == 1:
             for i in range(len(hero_inventory_file1)):
@@ -467,7 +465,7 @@ def start():
                 
             #drawing a circle at the checkpoint x and checkpoint y
             pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-                
+            
             draw_mini_map()
 
             if map_size == min_map_size  and vihicle_sit == 1 :
@@ -476,7 +474,7 @@ def start():
                 screen.blit(show_fuel , ( 0 , int(screen_height ) - 250))
                 fuel_values = pg.draw.circle(screen , (255 , 0 , 0)  , ( 100 , screen_height - 100 , checkpoint_size , 1 ))
 
-                screen.blit( cancel_icon , ( cancel_icon_x,cancel_icon_y))
+                screen.blit( cancel_icon , ( cancel_icon_x , cancel_icon_y))
             
             screen.blit(show_health     , ( bigfont + 10 , int(screen_height ) - bigfont * 6)) , screen.blit(health_icon     , ( 10 , int(screen_height ) - bigfont * 6))
             screen.blit(show_hero_armor , ( bigfont + 10 , int(screen_height ) - bigfont * 5)) , screen.blit(armor_icon      , ( 10 , int(screen_height ) - bigfont * 5))
@@ -484,8 +482,15 @@ def start():
             screen.blit(show_radiation  , ( bigfont + 10 , int(screen_height ) - bigfont * 3)) , screen.blit(radiation_icon  , ( 10 , int(screen_height ) - bigfont * 3))
             screen.blit(show_energy     , ( bigfont + 10 , int(screen_height ) - bigfont * 2)) , screen.blit(energy_icon     , ( 10 , int(screen_height ) - bigfont * 2))
             screen.blit(show_money      , ( 10       , int(screen_height ) - bigfont))
+            
+            for i in range( len ( fuel_values_list ) ) :
+                screen.blit(fuel_values_list1[i] , ( 400 + fuel_bar_width * -math.cos(-fuel)  * i / 3 , 400 + fuel_bar_width * -math.sin(fuel ) * i / 3 ))
 
-            if blit_distance == 1 and map_size == min_map_size : screen.blit(show_distance  , ( hero_x , hero_y - bigfont ) )
+
+            if blit_distance == 1 and map_size == min_map_size : screen.blit(show_distance , ( hero_x , hero_y - bigfont ) )
+
+
+        
 
             #for i in range(len(hero_belt_inventory_images)) : screen.blit( hero_belt_inventory_images[i] , ( int(screen_width) / 2 - cell_size * i + 10  + cell_size , int(screen_height) - cell_size / 2 - items_images[i].get_height() / 2 ) )
 
@@ -651,7 +656,7 @@ while run :
     mouse_visible = False ; cursor = pg.image.load( 'Interface/icons/Select/0.png' ) ; screen.blit( cursor , ( pos[ 0 ] - mouse_horizontal_offset , pos[ 1 ]  - mouse_vertical_offset )) ; calc_dist = math.sqrt( (( x_2_list - x_1_list   * hero_checkpoint_offset_x) ** 2 ) +  ( (  y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) /100) ; show_distance = small_font.render('Distance : ' + str(int(calc_dist) /100) + ' m' , False , small_font_color )
     
     for i in range(len(Companions_file1)) :  
-        if game_state == 'Play' and dialoge_started == 1 and pos[0] >=  -camera.rect[0] + int(Companions_file1[i].split(',')[0])  and\
+        if game_state == 'Play' and dialoge_started == 1 and pos[0] >=  -camera.rect[0] + int(Companions_file1[i].split(',')[0])  and \
             pos[0] <= -camera.rect[0] + int(Companions_file1[i].split(',')[0]) + Companions_images_list[i].get_width() and\
                   pos[1] >=  -camera.rect[1] + int(Companions_file1[i].split(',')[1])  and pos[1] <=  -camera.rect[1] + int(Companions_file1[i].split(',')[1]) +  Companions_images_list[i].get_height():
             
