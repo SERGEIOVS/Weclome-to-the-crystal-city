@@ -28,7 +28,7 @@ fuel       = 50
 gas        = 0
 Colors_Coords_x_1 = [] ; Colors_Coords_y_1 = [] ; Colors_Coords_x_2 = [] ; Colors_Coords_y_2 = []
 cell_size = 50
-cells = 6
+cells = 5
 grid_size1 = int(100 / map_scale)
 grid_size2 = int(100 / map_scale)
 

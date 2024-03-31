@@ -67,6 +67,7 @@ def draw_mini_map():
         
         hero_marker = pg.draw.circle(mini_map_surf , ( 255 , 100 , 0 )        , ( minimap_border_offset + camera.rect[0] / (100 * map_scale) + minimap_border_offset * minimap_object_offset ,  camera.rect[1] / (100 * map_scale) + minimap_border_offset * minimap_object_offset1  ) , 1 / map_scale )        
         
+
         for i in range(len(custom_checkpoints_list_x)) : pg.draw.circle(mini_map_surf , (255 , 0 , 0) , ( int(custom_checkpoints_list_x[i]) / (100 * map_scale ) , int(custom_checkpoints_list_y[i]) / (100 * map_scale)) , int(1 / map_scale)  , int(1 / map_scale) )
 
         screen.blit(mini_map_surf , ( minimap_x , minimap_y ) )
@@ -123,7 +124,7 @@ def Animations():
                         hero       =                'Objects/Characters/Hero/' + str(name)      + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png'
                         hero_image = pg.image.load( 'Objects/Characters/Hero/' + str(name)      + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png')
                         heroimage  = Image.open(    'Objects/Characters/Hero/' + str(name)      + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png')
-                        hero_x , hero_y = int(screen_width) / 2  - heroimage.width /2 , int(screen_height)  /2 - heroimage.height /2
+                        hero_x , hero_y = int(screen_width) / 2  - heroimage.width /2 , int(screen_height)  / 2 - heroimage.height /2
 
                     if animation >= len(hero_animations_dir) - 1:
                         animation = 0
@@ -134,7 +135,7 @@ def Animations():
                         hero       =                'Objects/Characters/Hero/' + str(name) + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png'
                         hero_image = pg.image.load( 'Objects/Characters/Hero/' + str(name) + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png')
                         heroimage  = Image.open(    'Objects/Characters/Hero/' + str(name) + '/' + str(state) + '/' + str(turn) + '/' + str(animation) + '.png')
-                        hero_x , hero_y = int(screen_width) / 2  - heroimage.width / 2 , int(screen_height)  /2 - heroimage.height / 2
+                        hero_x , hero_y = int(screen_width) / 2  - heroimage.width / 2 , int(screen_height)  / 2 - heroimage.height / 2
 
 def mini_map_keyboard_controls():
     keys = pg.key.get_pressed()
@@ -381,10 +382,11 @@ def start():
         for i in range(len(checkpoints_file1)) : pg.draw.circle(screen , (255 , 0 , 0 ) , (-camera.rect[0] + int(checkpoints_file1[i].split(',')[0]) + 50 , -camera.rect[1] + int(checkpoints_file1[i].split(',')[1]) + 180) , 50 , 1 )
         pg.draw.circle(screen , (0 , 0 , 0)  , ( -camera.rect[0] + int(screen_width) / 2 , -camera.rect[1] + int(screen_height) / 2  ) , 200)
 
-        for i in range(len(custom_checkpoints_list_x)) :
-            pg.draw.circle(screen , (255 , 0 , 0)      , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i])      ) , 20  , 5 )
-            screen.blit(custom_checkpoint_title        , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
-            mini_map_surf.blit(custom_checkpoint_title , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
+        for i in range(len(custom_checkpoints_list_x)):
+            if len(custom_checkpoints_list) != 0:
+                pg.draw.circle(screen , (255 , 0 , 0)      , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i])      ) , 20  , 5 )
+                screen.blit(custom_checkpoint_title        , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
+                mini_map_surf.blit(custom_checkpoint_title , ( -camera.rect[ 0 ] + int(custom_checkpoints_list_x[i]) , -camera.rect[ 1 ] + int(custom_checkpoints_list_y[i]) - 50 ))
 
         for i in range(len(Companions_file1)) : 
              if camera.rect[0] + int(screen_width) - fov >= int(Companions_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(Companions_file1[i].split(',')[1]):
@@ -428,7 +430,6 @@ def start():
 
         fog                  = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
         acid_cloud           = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-        #water_bubbles
         burst                = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         damage_effect        = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         heal_effect          = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
@@ -439,14 +440,13 @@ def start():
         blood_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
         research_complete    = 0
 
-
-
         if show_interface == 1:
             for i in range(len(hero_inventory_file1)):
                 pg.draw.rect(screen , ( cell_color)           , ( int(screen_width) / 2 - cell_size * i     + cell_size , int(screen_height) - cell_size , cell_size , cell_size ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius ) #drawing a inventory cells
                 pg.draw.rect(screen , ( Button_frame_color  ) , ( int(screen_width) / 2 - cell_size * item  + cell_size , int(screen_height) - cell_size , cell_size , cell_size ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius) #drawing a inventory cell_frame for a selected item in inventory
             
-            screen.blit(hero_inventory[item] , (int(screen_width ) / 2 , int(screen_height) - cell_size * 2  )) #drawing a title of the item in inventory
+            if len(hero_inventory)  != 0:
+                screen.blit(hero_inventory[item] , (int(screen_width ) / 2 , int(screen_height) - cell_size * 2  )) #drawing a title of the item in inventory
     
             dark_surf.fill(dark_surf_color) ; dialoge_surf.fill((0 , 0 , 0 )) ; dark_surf.set_alpha(dark_level)
             screen.blit(dark_surf     , ( 0 , 0 )) 
@@ -482,15 +482,14 @@ def start():
             screen.blit(show_radiation  , ( bigfont + 10 , int(screen_height ) - bigfont * 3)) , screen.blit(radiation_icon  , ( 10 , int(screen_height ) - bigfont * 3))
             screen.blit(show_energy     , ( bigfont + 10 , int(screen_height ) - bigfont * 2)) , screen.blit(energy_icon     , ( 10 , int(screen_height ) - bigfont * 2))
             screen.blit(show_money      , ( 10       , int(screen_height ) - bigfont))
+        
+            pg.draw.rect(screen , (Button_frame_color) , ( 400 + fuel_bar_width * 2  * -math.cos(-fuel) , 400 + fuel_bar_width * 2  * -math.sin(-fuel ), 40 , 40 ))
+
             
             for i in range( len ( fuel_values_list ) ) :
-                screen.blit(fuel_values_list1[i] , ( 400 + fuel_bar_width * -math.cos(-fuel)  * i / 3 , 400 + fuel_bar_width * -math.sin(fuel ) * i / 3 ))
-
+                screen.blit(fuel_values_list1[i] , ( 400 + fuel_bar_width * -math.cos(-fuel)  * i / 3 , 400 + fuel_bar_width * -math.sin(-fuel ) * i / 3 ))
 
             if blit_distance == 1 and map_size == min_map_size : screen.blit(show_distance , ( hero_x , hero_y - bigfont ) )
-
-
-        
 
             #for i in range(len(hero_belt_inventory_images)) : screen.blit( hero_belt_inventory_images[i] , ( int(screen_width) / 2 - cell_size * i + 10  + cell_size , int(screen_height) - cell_size / 2 - items_images[i].get_height() / 2 ) )
 

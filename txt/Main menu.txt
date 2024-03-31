@@ -2,8 +2,3 @@ New game
 Settings
 Quit game
 Mods
-Load game
-Stats
-Achievements
-Update
-Report
