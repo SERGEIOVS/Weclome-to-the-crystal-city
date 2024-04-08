@@ -4,7 +4,6 @@ pg.init() ; pg.font.init()
 import  getpass;import pymysql
 
 #Game directory
-
 cwd = os.getcwd()
 d1 =  datetime.datetime.today() ; d1 += datetime.timedelta( hours = 0 ) ; pos = pg.mouse.get_pos()
 mods_dir_path = 'mods'
@@ -21,7 +20,7 @@ logging.basicConfig(filename = logpaths[0] , level = log_levels[0] , format = lo
 colors = [ ( 0 , 0 , 255 ) , ( 0 , 0 , 0 ) , (250 , 0 , 0)  , (255 , 255 , 255) , (45 , 45 , 45 ) ]
 
 mags       = 3
-map_scale  = 1 ; map_size = 3 ; show_map = 0 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; unit_moving = 1 ; unit_speed = 0 ; unit_speed1 = 0 ; max_unit_speed = 4
+map_scale  = 1 ; map_size = 3 ; show_map = 1 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; unit_moving = 1 ; unit_speed = 0 ; unit_speed1 = 0 ; max_unit_speed = 4
 bg_num     = 1 ; wallpapers_dir = os.listdir('Wallpapers/' + str(screen_width) + '_' + str(screen_height) + '/') ; wallpaper  = wallpapers_dir[bg_num]
 dark_level = 0 ; max_dark_level  = 100 ; volume_levels = 10 ; settings_values = 5
 fuel       = 50
@@ -86,8 +85,8 @@ for i in range(len(fuel_values_list)) :
     i = big_font.render(str(fuel_values_list[i]) , False , small_font_color )
     fuel_values_list1.append(i)
 
-show_speed         = big_font.render('Speed : ' + str(hero_speed)                           , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-show_gas          = big_font.render('Gas  : ' + str(gas), False , small_font_color )
+show_speed  = big_font.render('Speed : ' + str(hero_speed)                           , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+show_gas    = big_font.render('Gas  : ' + str(gas), False , small_font_color )
 custom_checkpoint_title1 = big_font.render('Custom checkpoint'                              , False , small_font_color ) 
 
 show_mods_count = big_font.render("(" + str(len(os.listdir(mods_dir_path))) + ")" , False , small_font_color ) 
@@ -96,7 +95,7 @@ show_mods_count = big_font.render("(" + str(len(os.listdir(mods_dir_path))) + ")
 bg_num = 1 ; wallpapers_dir = os.listdir('wallpapers/' + str(screen_width) + '_' + str(screen_height) + '/') ; wallpaper = wallpapers_dir[bg_num] ; map_grid = 1 ; dark_level = 0 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; meter = 100 ; cm = 1 ; km = meter * 1000 ; inch = 2.54 ; map_width , map_height = meter * km , meter * km ; map_scale = 1 ; map_size = 3 ; show_map = 1 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_islands = 0 
 
 #surfs
-checkpoints_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; mini_map_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; quests_surf = pg.Surface(( 200 , 200 )) ; dark_surf = pg.Surface(( int(screen_width) , int(screen_height) )) ; interface_surf = pg.Surface(( 200 , 200 )) ; dark_surf_color = ((0 , 0 , 0)) ; quest_surf_color = colors[1]
+checkpoints_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; hero_shadow_surf = pg.Surface(( 100 , 100 )) ; mini_map_surf = pg.Surface(( int(screen_width) / map_size , int(screen_height) / map_size )) ; quests_surf = pg.Surface(( 200 , 200 )) ; dark_surf = pg.Surface(( int(screen_width) , int(screen_height) )) ; interface_surf = pg.Surface(( 200 , 200 )) ; dark_surf_color = ((0 , 0 , 0)) ; quest_surf_color = colors[1]
 dialoge_surf = pg.Surface((  100 , bigfont * len(actions_list) - bigfont))
 show_game_title = big_font.render(str(Game_title) , False , big_font_color) ; show_game_version = small_font.render('Version : ' + str(Game_version) , False , small_font_color) ; show_update = small_font.render(str(update_name) , False , small_font_color) ; show_game_state = big_font.render(str(game_state) , False , small_font_color) ; show_author = small_font.render('Author : ' + str(author) , False , small_font_color) ; show_created_date = small_font.render('Created : 25 oktober 2019' , False , small_font_color) ; show_money = small_font.render('$ : ' + str(hero_money) , False , ( 250 , 0 , 0 ) ) ; show_action = big_font.render(str(action) , False , ( 250 , 0 , 0 ) ) ; show_action1 = big_font.render('Trade' , False , ( 250 , 0 , 0 ) ) ; show_action2 = big_font.render('Repair' , False , ( 250 , 0 , 0 ))
 hero_checkpoint_offset_x = 0 ; hero_checkpoint_offset_y = 0 ; toggle_checkpoints = 1
