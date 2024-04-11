@@ -23,18 +23,19 @@ custom_checkpoint_title = mini_map_font_size.render('Custom checkpoint' , False 
 interface_images = []
 
 game_modes  = ['Survival' , 'God mode' , 'Hardcore'] ; game_modes1 = [] ; game_mode_num = 0 ; game_mode = game_modes[game_mode_num]
-game_modes_file = open('txt/Game_modes.txt','r')
-for i in range(len(game_modes)):pass
+#game_modes_file = open('txt/Game_modes.txt','r')
 
+#for i in range(len(game_modes_file)) :  pass
 for i in range(len(game_modes)) : i = big_font.render(game_modes[i].split(',')[0].strip() , False , small_font_color ) ; game_modes1.append(i)     
 
 menu_titles = ['Backpack' , 'Crafting' , 'Quests'] ; menu_titles1 = [] ; menu_title_num = 0 ; menu_title = menu_titles[menu_title_num]
 for i in range(len(menu_titles)) : i = small_font.render(menu_titles[i].split(',')[0].strip() , False , small_font_color ) ; menu_titles1.append(i)     
 
-difficulties = ['Peaceful' , 'Easy' , 'Normal' , 'Hard'] ; difficulties1   = [] ; difficulty_num  = 0 ; difficulty = difficulties[difficulty_num]
+difficulties = ['Peaceful' , 'Easy' , 'Normal' , 'Hard'] ; difficulties1 = [] ; difficulty_num = 0 ; difficulty = difficulties[difficulty_num]
 for i in range(len(difficulties)) : i = big_font.render(difficulties[i].split(',')[0].strip() , False , small_font_color ) ; difficulties1.append(i)     
+difficulties_modes_file = open('txt/difficulties.txt','r')
 
-necessary_craft_items = [] ; prices_list  = [] ; prices_list1 = []
+necessary_craft_items = [] ; prices_list  = [] ; prices_list1 = [] 
 
 for i in range(len(prices_file1)) : prices_list.append(prices_file1[i])
 for i in range(len(prices_list))  : i = big_font.render('Price : ' + prices_file1[i].strip() , False , small_font_color ) ; prices_list1.append(i)     
@@ -52,6 +53,9 @@ hero_inventory_type = hero_inventory_types[hero_inventory_num]
 hero_marker_color = (255 , int(255 / 2) , 0)
 
 room_height = 250
+room_width  = 5 * meter
+room_size   = room_height * room_width
+rooms_colors = [(133 , 133 , 133),(100 , 100 , 100)]
 
 #def cutscene() : pass
 
@@ -307,7 +311,6 @@ def toggle_main_menu():
             len(os.listdir(mods_dir_path))
         screen.blit(show_mods_count                   , (int(screen_width) /  2 - button_width / 2 + 75 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 3 * 40 + bigfont / 2 , button_width , bigfont ))
 
-
 def text_updating(): 
     global new_craft,new_quest,checkpoints_list,achievements_list,hero_inventory_nums,show_game_state,ok,apply,cancel,action_counter,checkpoints_file1,dialoge_started,achievements_file1,checkpoint_size,dialoge_num,action,checkpoint_num
 
@@ -389,7 +392,7 @@ def start():
                                                                 
                                                                 [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) + meter * -math.sin(-fuel ) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * -math.cos(-fuel ) ] ,
                                                                  
-                                                                [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0])  , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter *2 ] ,
+                                                                [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0])  , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * 2 ] ,
                                                                 
                                                                 [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) + meter * math.sin(fuel ) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * math.cos(fuel ) ] 
                                                                  
@@ -400,14 +403,24 @@ def start():
                  if camera.rect[0] + int(screen_width) - fov >= int(vihicles_file1[i].split(',')[0])  and camera.rect[1] + int(screen_height) - fov >= int(vihicles_file1[i].split(',')[1]) and hero_image != vihicles_images_list[i]:
                     screen.blit( vihicles_images_list[i] , ( -camera.rect[ 0 ] + int(vihicles_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(vihicles_file1[i].split(',')[1]) ) )
 
-            test = [[400 * -math.cos(-fuel)  * i / 3 , 400 + fuel_bar_width * -math.sin(-fuel )] , [350 , 320 ] , [400 , 440 ] , [560 , 460 ] ,  [700 , 460 ] ]
+            test = [ [ ( 4 * meter) * -math.cos(-fuel)  * i / 3 , (5 * meter) + meter * -math.sin(-fuel )] , [ (3 * meter ) + 50 , ( 4 * meter) + 20 ] , [ (4 * meter) , ( 5 * meter ) + 40 ] , [( 5 * meter ) + 60 , ( 5 * meter ) + 60 ] , [(7 * meter) , (5 * meter) + 60 ] ]
+            
+            #potolok
+            pg.draw.polygon(screen , (rooms_colors[0]) , ( [ -camera.rect[0] + 400 * -math.cos(-fuel)  * i / 3 , -camera.rect[1] + 400 + fuel_bar_width * -math.sin(-fuel )] , [-camera.rect[0] + 350 , -camera.rect[1] + 420 ] , [ -camera.rect[0] + 400 , -camera.rect[1] + 540 ] , [ -camera.rect[0] + 560 , -camera.rect[1] + 560 ] , [ -camera.rect[0] + 700 , -camera.rect[1] + 560 ]  ))
 
-            pg.draw.polygon(screen , (133 , 133 , 133) , ( [ -camera.rect[0] + 400 * -math.cos(-fuel)  * i / 3 , -camera.rect[1] + 400 + fuel_bar_width * -math.sin(-fuel )] , [-camera.rect[0] + 350 , -camera.rect[1] + 420 ] , [ -camera.rect[0] + 400 , -camera.rect[1] + 540 ] , [ -camera.rect[0] + 560 , -camera.rect[1] + 560 ] , [ -camera.rect[0] + 700 , -camera.rect[1] + 560 ]  ))
+            #room_walls
+            pg.draw.line(screen , (0 , 0 , 0 ) , [-camera.rect[0] + test[0][0] , -camera.rect[1] + test[0][1]              ] ,
+                                                 [-camera.rect[0] + test[1][0] , -camera.rect[1] + test[1][1] - room_height] ,  1 )
 
-            pg.draw.polygon(screen , (100 , 100 , 100) , ( [-camera.rect[0] + test[0][0] , -camera.rect[1] + test[0][1] - room_height] , [-camera.rect[ 0 ] + test[1][0] , -camera.rect[ 1 ] + test[1][1] - room_height ] , [-camera.rect[ 0 ] + test[2][0] ,-camera.rect[ 1 ] + test[2][1] - room_height ] , [-camera.rect[ 0 ] + test[3][0] , -camera.rect[ 1 ] + test[3][1] - room_height ] , [-camera.rect[ 0 ] + test[4][0] , -camera.rect[ 1 ] + test[4][1] - room_height ] ))
+
+            #room_floor
+            pg.draw.polygon(screen , (rooms_colors[1]) , ( [-camera.rect[0] + test[0][0] , -camera.rect[1] + test[0][1] - room_height] , [-camera.rect[ 0 ] + test[1][0] , -camera.rect[ 1 ] + test[1][1] - room_height ] , [-camera.rect[ 0 ] + test[2][0] ,-camera.rect[ 1 ] + test[2][1] - room_height ] , [-camera.rect[ 0 ] + test[3][0] , -camera.rect[ 1 ] + test[3][1] - room_height ] , [-camera.rect[ 0 ] + test[4][0] , -camera.rect[ 1 ] + test[4][1] - room_height ] ))
+            
+
+
             
             for i in range(len(checkpoints_file1)) : pg.draw.circle(screen , (255 , 0 , 0 ) , (-camera.rect[0] + int(checkpoints_file1[i].split(',')[0]) + 50 , -camera.rect[1] + int(checkpoints_file1[i].split(',')[1]) + 180) , 50 , 1 )
-            pg.draw.circle(screen , (0 , 0 , 0)  , ( -camera.rect[0] + int(screen_width) / 2 , -camera.rect[1] + int(screen_height) / 2  ) , 200)
+            #pg.draw.circle(screen , (0 , 0 , 0)  , ( -camera.rect[0] + int(screen_width) / 2 , -camera.rect[1] + int(screen_height) / 2  ) , 200)
 
         for i in range(len(custom_checkpoints_list_x)):
             if len(custom_checkpoints_list) != 0:
@@ -464,18 +477,17 @@ def start():
 
         screen.blit( hero_image , ( hero_x , hero_y ) )
 
-
-        fog                  = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-        acid_cloud           = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
-        burst                = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        damage_effect        = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        heal_effect          = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        death_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        research_effect      = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        loading_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        dialoge_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        blood_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
-        research_complete    = 0
+        #fog                  = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 + 600 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
+        #acid_cloud           = pg.draw.rect(screen   , (Button_color) , (-camera.rect[ 0 ] + int(screen_width) /  2 - button_width / 2 , -camera.rect[ 1 ] + int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 0 * 40 + bigfont /2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
+        #burst                = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #damage_effect        = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #heal_effect          = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #death_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #research_effect      = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #loading_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #dialoge_effect       = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #blood_effect         = pg.draw.circle(screen , (255 , 0 , 0)  , ( -camera.rect[0] + int(checkpoints_file1[0].split(',')[0]) , -camera.rect[1] + int(checkpoints_file1[0].split(',')[1])) , checkpoint_size , 1 )
+        #research_complete    = 0
 
         if show_interface == 1:
             for i in range(len(hero_inventory_file1)):
