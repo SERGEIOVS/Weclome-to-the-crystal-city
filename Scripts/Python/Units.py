@@ -121,5 +121,4 @@ for i in range(len(Enemies_file1)) :
 
 killed_units        = []
 selected_units      = []
-unit_with_a_quest   = 0
 units_with_a_quests = [Companions_images_list[0]]

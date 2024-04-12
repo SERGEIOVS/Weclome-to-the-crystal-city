@@ -52,10 +52,11 @@ hero_inventory_num = 0
 hero_inventory_type = hero_inventory_types[hero_inventory_num]
 hero_marker_color = (255 , int(255 / 2) , 0)
 
-room_height = 250
-room_width  = 5 * meter
+room_height , room_width = 2 * meter + 50 , 5 * meter
 room_size   = room_height * room_width
-rooms_colors = [(133 , 133 , 133),(100 , 100 , 100)]
+walll_size  = 10
+
+sidewalk_width , sidewalk_height = 3 * meter , 3 * meter
 
 #def cutscene() : pass
 
@@ -311,6 +312,17 @@ def toggle_main_menu():
             len(os.listdir(mods_dir_path))
         screen.blit(show_mods_count                   , (int(screen_width) /  2 - button_width / 2 + 75 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + 3 * 40 + bigfont / 2 , button_width , bigfont ))
 
+def toggle_mods_menu():
+    if game_state == 'Mods menu':
+        draw_menu()
+        for i in range(len(mods_dir_path)):
+            Button = pg.draw.rect(screen , (Button_color) , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 0 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)            
+            screen.blit(mods_dir_path[i]                      , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + i * 40 + bigfont / 2 , button_width , bigfont ))
+            pg.draw.rect(screen , (Button_frame_color)    , (int(screen_width) /  2 - button_width / 2 , int(screen_height) / 2 - int(screen_height) / 4 - bigfont + active_button * 40 + bigfont / 2 , button_width , bigfont + 5 ) , 2 , 0 , button_border_radius , button_border_radius , button_border_radius , button_border_radius)
+
+
+
+
 def text_updating(): 
     global new_craft,new_quest,checkpoints_list,achievements_list,hero_inventory_nums,show_game_state,ok,apply,cancel,action_counter,checkpoints_file1,dialoge_started,achievements_file1,checkpoint_size,dialoge_num,action,checkpoint_num
 
@@ -369,7 +381,7 @@ def start():
                 screen.blit(crafts_list[i]   , ( int(screen_width) / 2 - button_width / 2 + bigfont , int(screen_height) / 10 + i * 40 , 100 , bigfont ))
                 screen.blit(new_craft        , ( int(screen_width) / 2 + - button_width / 2 - cell_size * 2 , int(screen_height) / 10 + i * 40 , 100 , bigfont ))
 
-    toggle_settings() ; toggle_main_menu() ; character_select() ; Trade_menu() ; game_mode_select() ; Open_backpack() ; mini_map_keyboard_controls() ; Difficulty_select()
+    toggle_settings() ; toggle_main_menu() ; character_select() ; Trade_menu() ; game_mode_select() ; Open_backpack() ; mini_map_keyboard_controls() ; Difficulty_select() ; toggle_mods_menu()
 
     if game_state == 'Play':
         mouse_visible = False ; mouse_set_visible = pg.mouse.set_visible( mouse_visible )
@@ -383,44 +395,88 @@ def start():
             #for y in range( len ( islands_file1 ) ) : 
                 #screen.blit( islands_images[ i ] , (-camera.rect[0] + int(islands_file1[i].split(',')[0]) + i * int(islands_file1[i].split(',')[2]) / 100 , -camera.rect[1] + int(islands_file1[i].split(',')[1]) + y * int(islands_file1[i].split(',')[2]) ,  5 / map_scale ,  5 / map_scale ))
             
-            for i in range( len ( roads_file1 ) ) : 
-                if camera.rect[0] + int(screen_width) - fov >= int(roads_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(roads_file1[i].split(',')[1]):
-                    #pg.draw.line(screen , (20, 20  , 20 ) ,  , 10)
-                    pg.draw.polygon(screen , (20 , 20 , 20) , (  
-                        
-                                                                [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) ] ,
-                                                                
-                                                                [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) + meter * -math.sin(-fuel ) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * -math.cos(-fuel ) ] ,
-                                                                 
-                                                                [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0])  , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * 2 ] ,
-                                                                
-                                                                [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) + meter * math.sin(fuel ) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * math.cos(fuel ) ] 
-                                                                 
-                                                                ))
+            #for i in range( len ( roads_file1 ) ) : 
+            #    if camera.rect[0] + int(screen_width) - fov >= int(roads_file1[i].split(',')[0]) and camera.rect[1] + int(screen_height) - fov >= int(roads_file1[i].split(',')[1]):
+            #        #pg.draw.line(screen , (20, 20  , 20 ) ,  , 10)
+            #        pg.draw.polygon(screen , (20 , 20 , 20) , (  
+            #            
+            #                                                    [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) ] ,
+            #                                                    
+            #                                                    [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) + meter * -math.sin(-fuel ) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * -math.cos(-fuel ) ] ,
+            #                                                     
+            #                                                    [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0])  , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * 2 ] ,
+            #                                                    
+            #                                                   [  -camera.rect[ 0 ] + int(roads_file1[i].split(',')[0]) + meter * math.sin(fuel ) , -camera.rect[ 1 ] + int(roads_file1[i].split(',')[1]) + meter * math.cos(fuel ) ] 
+            #                                                    
+            #                                                    ))
 
             
             for i in range( len ( vihicles_file1 ) ) : 
                  if camera.rect[0] + int(screen_width) - fov >= int(vihicles_file1[i].split(',')[0])  and camera.rect[1] + int(screen_height) - fov >= int(vihicles_file1[i].split(',')[1]) and hero_image != vihicles_images_list[i]:
                     screen.blit( vihicles_images_list[i] , ( -camera.rect[ 0 ] + int(vihicles_file1[i].split(',')[0]) , -camera.rect[ 1 ] + int(vihicles_file1[i].split(',')[1]) ) )
 
-            test = [ [ ( 4 * meter) * -math.cos(-fuel)  * i / 3 , (5 * meter) + meter * -math.sin(-fuel )] , [ (3 * meter ) + 50 , ( 4 * meter) + 20 ] , [ (4 * meter) , ( 5 * meter ) + 40 ] , [( 5 * meter ) + 60 , ( 5 * meter ) + 60 ] , [(7 * meter) , (5 * meter) + 60 ] ]
-            
-            #potolok
-            pg.draw.polygon(screen , (rooms_colors[0]) , ( [ -camera.rect[0] + 400 * -math.cos(-fuel)  * i / 3 , -camera.rect[1] + 400 + fuel_bar_width * -math.sin(-fuel )] , [-camera.rect[0] + 350 , -camera.rect[1] + 420 ] , [ -camera.rect[0] + 400 , -camera.rect[1] + 540 ] , [ -camera.rect[0] + 560 , -camera.rect[1] + 560 ] , [ -camera.rect[0] + 700 , -camera.rect[1] + 560 ]  ))
 
+            #[ ( 3  * meter) * -math.cos(fuel)  * i / 3 , (3 * meter) + meter * -math.sin(fuel ) * i / 3]
+
+            
             #room_walls
-            pg.draw.line(screen , (0 , 0 , 0 ) , [-camera.rect[0] + test[0][0] , -camera.rect[1] + test[0][1]              ] ,
-                                                 [-camera.rect[0] + test[1][0] , -camera.rect[1] + test[1][1] - room_height] ,  1 )
+            for i in range(len(buildings_file1)) :
+                
+                #room_floor
+                pg.draw.polygon(screen , (colors[7]) , (       
+                    
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * -math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * -math.sin(fuel) ] ,
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * -math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * -math.sin(fuel) ] , 
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * -math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * -math.sin(fuel) ] ,
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * -math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * -math.sin(fuel) ] , 
+                                                                  
+                                                               ))
 
 
-            #room_floor
-            pg.draw.polygon(screen , (rooms_colors[1]) , ( [-camera.rect[0] + test[0][0] , -camera.rect[1] + test[0][1] - room_height] , [-camera.rect[ 0 ] + test[1][0] , -camera.rect[ 1 ] + test[1][1] - room_height ] , [-camera.rect[ 0 ] + test[2][0] ,-camera.rect[ 1 ] + test[2][1] - room_height ] , [-camera.rect[ 0 ] + test[3][0] , -camera.rect[ 1 ] + test[3][1] - room_height ] , [-camera.rect[ 0 ] + test[4][0] , -camera.rect[ 1 ] + test[4][1] - room_height ] ))
-            
+                #room_floor
+                pg.draw.polygon(screen , (colors[5]) ,     (  
+                    
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height             ] ,
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height             ] , 
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height             ] ,
+                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height             ] , 
+                                                               
+                                                               
+                                                            ) , walll_size)
+                
 
 
-            
+                #building_floor_border
+                #pg.draw.polygon(screen , (colors[5]) , (       
+                #                                               
+                #                                               [-camera.rect[0] + meter * 30  +  int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + meter * 30 + int(buildings_file1[i].split(',')[1])              ] ,
+                #                                               [-camera.rect[0] + meter * 30  +  int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + meter * 30 + int(buildings_file1[i].split(',')[1])              ] , 
+                #                                               [-camera.rect[0] + meter * 30  +  int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + meter * 30 + int(buildings_file1[i].split(',')[1])              ] ,
+                #                                               [-camera.rect[0] + meter * 30  +  int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + meter * 30 + int(buildings_file1[i].split(',')[1])              ] , 
+                #                                               
+                #                                        ))
+                
+
+
+                #pg.draw.circle(screen , (colors[7])  ,         ( -camera.rect[0] + meter * 30  + test[i][0] , -camera.rect[1] + meter * 30 + test[i][1]               ) , walll_size / 2)
+
+
+                #building_roof_border
+                #pg.draw.polygon(screen , (colors[7]) , (       [-camera.rect[0] + meter * 30  + test[0][0] , -camera.rect[1] + meter * 30 + test[0][1] - room_height] ,
+                #                                               [-camera.rect[0] + meter * 30  + test[1][0] , -camera.rect[1] + meter * 30 + test[1][1] - room_height] ,
+                #                                               [-camera.rect[0] + meter * 30  + test[2][0] , -camera.rect[1] + meter * 30 + test[2][1] - room_height] ,
+                #                                               [-camera.rect[0] + meter * 30  + test[3][0] , -camera.rect[1] + meter * 30 + test[3][1] - room_height] ,
+                #                                               [-camera.rect[0] + meter * 30  + test[4][0] , -camera.rect[1] + meter * 30 + test[4][1] - room_height] ) , walll_size)
+                
+                
+                #walls
+                #pg.draw.line(screen    , (0 , 0 , 0      ) ,   [-camera.rect[0] + meter * 30  + test[i][0] , -camera.rect[1] + meter * 30 + test[i][1]              ] ,
+                #                                               [-camera.rect[0] + meter * 30  + test[i][0] , -camera.rect[1] + meter * 30 + test[i][1] - room_height] ,  1 )
+                
+                #pg.draw.circle(screen , (colors[7])  ,         (-camera.rect[0] + meter * 30  + test[i][0] , -camera.rect[1] + meter * 30 + test[i][1] - room_height ) , walll_size / 2)
+                
+
             for i in range(len(checkpoints_file1)) : pg.draw.circle(screen , (255 , 0 , 0 ) , (-camera.rect[0] + int(checkpoints_file1[i].split(',')[0]) + 50 , -camera.rect[1] + int(checkpoints_file1[i].split(',')[1]) + 180) , 50 , 1 )
-            #pg.draw.circle(screen , (0 , 0 , 0)  , ( -camera.rect[0] + int(screen_width) / 2 , -camera.rect[1] + int(screen_height) / 2  ) , 200)
 
         for i in range(len(custom_checkpoints_list_x)):
             if len(custom_checkpoints_list) != 0:
@@ -520,8 +576,8 @@ def start():
 
             if map_size == min_map_size  and vihicle_sit == 1 :
                 
-                pg.draw.line(  screen , (0 , 255 , 0) , (400 , 400) , ( 400 + fuel_bar_width * -math.cos(fuel) , 400 + fuel_bar_width * -math.sin(-fuel)) , 1)
-                screen.blit(show_fuel , ( 0 , int(screen_height ) - 250))
+                pg.draw.line( screen , (0 , 255 , 0) , (400 , 400) , ( 400 + fuel_bar_width * -math.cos(fuel) , 400 + fuel_bar_width * -math.sin(-fuel)) , 1)
+                screen.blit(  show_fuel , ( 0 , int(screen_height ) - 250))
                 fuel_values = pg.draw.circle(screen , (255 , 0 , 0)  , ( 100 , screen_height - 100 , checkpoint_size , 1 ))
 
                 screen.blit( cancel_icon , ( cancel_icon_x , cancel_icon_y))
@@ -531,7 +587,7 @@ def start():
             screen.blit(show_ammo       , ( bigfont + 10 , int(screen_height ) - bigfont * 4)) , screen.blit(ammo_icon       , ( 10 , int(screen_height ) - bigfont * 4))
             screen.blit(show_radiation  , ( bigfont + 10 , int(screen_height ) - bigfont * 3)) , screen.blit(radiation_icon  , ( 10 , int(screen_height ) - bigfont * 3))
             screen.blit(show_energy     , ( bigfont + 10 , int(screen_height ) - bigfont * 2)) , screen.blit(energy_icon     , ( 10 , int(screen_height ) - bigfont * 2))
-            screen.blit(show_money      , ( 10       , int(screen_height ) - bigfont))
+            screen.blit(show_money      , ( 10           , int(screen_height ) - bigfont))
         
             #pg.draw.rect(screen , (Button_frame_color) , ( 400 + fuel_bar_width * 2  * -math.cos(-fuel) , 400 + fuel_bar_width * 2  * -math.sin(-fuel ), 40 , 40 ))
 
@@ -541,8 +597,8 @@ def start():
                     #print('map width(km) : ' , int(map_width / km) , 'map height(km) : ' , int(map_height / km) , 'map box width  and height: ' , int(map_width / km) , ' , ' , int(map_height / km) )
 
             
-            for i in range( len ( fuel_values_list ) ) :
-                screen.blit(fuel_values_list1[i] , ( 400 + fuel_bar_width * -math.cos(-fuel)  * i / 3 , 400 + fuel_bar_width * -math.sin(-fuel ) * i / 3 ))
+            #for i in range( len ( fuel_values_list ) ) :
+            #    screen.blit(fuel_values_list1[i] , ( 400 + fuel_bar_width * -math.cos(-fuel)  * i / 3 , 400 + fuel_bar_width * -math.sin(-fuel ) * i / 3 ))
 
             if blit_distance == 1 and map_size == min_map_size : screen.blit(show_distance , ( hero_x , hero_y - bigfont ) )
 
@@ -696,7 +752,7 @@ while run :
         if keys [screenshot_btn ] : make_screenshot() ; logging.info( msg = 'SCREENSHOT SAVED!') ; print('Screenshot saved ! ')
         if keys [load_game_btn  ] : load_game() #load game
         if keys [save_game_btn  ] : save_game() #save game
-        if keys [pg.K_f] : fuel += 1 ; show_fuel = big_font.render('Fuel  : ' + str(fuel)    , False , small_font_color )
+        if keys [pg.K_f] : fuel += 0.1 ; show_fuel = big_font.render('Fuel  : ' + str(fuel)    , False , small_font_color ) ; print('Fuel : ' , fuel)
 
     if keys [pg.K_g  ] and keys[pg.K_LCTRL]  : toggle_god_mode() ;  spawn_sound.play() #GOD MODE - no damage , no limit etc
     if keys[back_btn]  : bg_image = bg_images[ random.randint( 0 , len(bg_images) - 1 ) ] ; game_state = 'Main menu'

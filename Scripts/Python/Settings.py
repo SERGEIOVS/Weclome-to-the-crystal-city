@@ -17,7 +17,7 @@ logpaths    = ['logs/info_log.txt' , 'logs/debug_log.txt' , 'logs/warning_log.tx
 log_levels  = [ logging.INFO , logging.WARNING , logging.ERROR , logging.CRITICAL , logging.DEBUG ]
 log_formats = ['%(asctime)s - %(levelname)s - %(message)s' , '%(levelname)s - %(asctime)s - %(message)s']
 logging.basicConfig(filename = logpaths[0] , level = log_levels[0] , format = log_formats[0])    #отключить протоколирование - logging.disable()
-colors = [ ( 0 , 0 , 255 ) , ( 0 , 0 , 0 ) , (250 , 0 , 0)  , (255 , 255 , 255) , (45 , 45 , 45 ) ]
+colors = [ ( 0 , 0 , 255 ) , ( 0 , 0 , 0 ) , (250 , 0 , 0)  , (255 , 255 , 255) , (45 , 45 , 45 ) , (133 , 133 , 133) , (100 , 100 , 100) , (75 , 75 , 75) ]
 
 mags       = 3
 map_scale  = 1 ; map_size = 3 ; show_map = 1 ; show_units = 1 ; show_buildings = 1 ; show_items = 1 ; show_interface = 1 ; open_backpack = 0 ; show_hero_stats = 1 ; unit_moving = 1 ; unit_speed = 0 ; unit_speed1 = 0 ; max_unit_speed = 4
@@ -77,7 +77,7 @@ buy        = big_font.render('Buy' , False , small_font_color ) ; add = big_font
 x          = big_font.render('x'   , False , small_font_color ) ; add = big_font.render('+' , False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
 
 show_fuel          = big_font.render('Fuel  : ' + str(fuel) , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-fuel_values_list = []
+fuel_values_list  = []
 fuel_values_list1 = []
 
 for i in range(1000):fuel_values_list.append(i)
@@ -107,14 +107,15 @@ if minimap_location == 'left_down' : minimap_x = 0      ; minimap_y = 0
 
 class cam :
     def __init__( self , x , y ) : self.rect = pg.Rect( int(camera_x) , int(camera_y) , int(screen_width) , int(screen_height))
-    def move( self , vector ) : self.rect[ 0 ] += vector[ 0 ] ; self.rect[ 1 ] += vector[ 1 ]
+    def move( self , vector ) : self.rect[0] += vector[0] ; self.rect[1] += vector[1]
 camera = cam( 0 , 0 ) ; vector = [ 0 , 0 ]
 
 #hero_x and hero_y
 x_1_list =  -camera.rect[ 0 ] + int(camera_x) + int(screen_width) / 2 + hero_checkpoint_offset_x ; y_1_list =  -camera.rect[ 1 ] + int(camera_y) + int(screen_height) / 2 + 100 + hero_checkpoint_offset_y ; x_2_list =  -camera.rect[ 0 ] + int(checkpoints_file1[checkpoint_num ].split(',')[0]) ; y_2_list =  -camera.rect[ 1 ] + int(checkpoints_file1[checkpoint_num ].split(',')[1]) #checkpoint_x andd checkpoint_y
-distances = [] ; distance_num = 0 ; calc_dist = math.sqrt( (( x_2_list - x_1_list * hero_checkpoint_offset_x) ** 2) +  ((y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) // 100) ; show_distance  = small_font.render('Distance : ' + str(int(calc_dist) // 100) + ' m' , False , small_font_color ) ; blit_action = 0 ; blit_distance  = 1
+distances = [] ; distance_num = 0 ; calc_dist = math.sqrt( (( x_2_list - x_1_list * hero_checkpoint_offset_x) ** 2) +  ((y_2_list - y_1_list * hero_checkpoint_offset_y) ** 2 ) // meter) ; show_distance  = small_font.render('Distance : ' + str(int(calc_dist) // meter) + ' m' , False , small_font_color ) ; blit_action = 0 ; blit_distance  = 0
 db_user = "root"
 host = "localhost" ; user = db_user ; password = "" ; db_name = "game" ; db_table_name = "units"
+
 try:
     connection = pymysql.connect(host = host , port = 3306 , user = user , password = password , database = db_name , cursorclass = pymysql.cursors.DictCursor)
     print("successfully connected...") ; print() ; print()
