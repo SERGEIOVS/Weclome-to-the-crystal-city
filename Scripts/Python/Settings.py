@@ -42,7 +42,7 @@ saves_list        = [] ; saves_file_name = 'txt/Saves/' + str(saving_type) + '/2
 langs_file_name   = 'txt/Languages.txt' ; langs_file_mode = 'r' ; langs_file = open (langs_file_name  , langs_file_mode , encoding= "utf-8") ; langs_file1 = langs_file.readlines() ; langs_list = []
 dialoges_list     = [] ; dialoges_file_name     = 'txt/langs/' + str(language) + '/Dialoges.txt' ; dialoges_file_mode = 'r' ; dialoges_file = open (dialoges_file_name , dialoges_file_mode , encoding = "utf-8") ; dialoges_file1 = dialoges_file.readlines() ; dialoge_num = 0 ; dialoge_started = 0
 checkpoints_list  = [] ; checkpoints_file_name  = 'txt/Objects/' + str(saving_type) + '/Checkpoints.txt' ; checkpoints_file_mode = 'r' ; checkpoints_file = open (checkpoints_file_name , checkpoints_file_mode , encoding = "utf-8") ; checkpoints_file1 = checkpoints_file.readlines() ; checkpoint_size = 100 ; checkpoint_num = 0
-custom_checkpoints_list = [] ;custom_checkpoints_list_x = [] ; custom_checkpoints_list_y = [] ; custom_checkpoint_size = 100 ; custom_checkpoint_num = 0
+custom_checkpoints_list = [] ; custom_checkpoints_list_x = [] ; custom_checkpoints_list_y = [] ; custom_checkpoint_size = 100 ; custom_checkpoint_num = 0
 
 achievements_list = [] ; achievements_file_name = 'txt/langs/' + str(language) + '/Achievements.txt' ; achievements_file_mode = 'r' ; achievements_file = open (achievements_file_name , achievements_file_mode , encoding = "utf-8") ; achievements_file1 = achievements_file.readlines()
 actions_list      = [] ; actions_file_name      = 'txt/langs/' + str(language) + '/Actions.txt' ; actions_file_mode = 'r' ; actions_file = open (actions_file_name , actions_file_mode , encoding= "utf-8") ; actions_file1 = actions_file.readlines() ; actions_list.append(i) ; action_num = 0 ; action_counter = 0 ; action = actions_list[action_num]
@@ -85,9 +85,9 @@ for i in range(len(fuel_values_list)) :
     i = big_font.render(str(fuel_values_list[i]) , False , small_font_color )
     fuel_values_list1.append(i)
 
-show_speed  = big_font.render('Speed : ' + str(hero_speed)                           , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
-show_gas    = big_font.render('Gas  : ' + str(gas), False , small_font_color )
-custom_checkpoint_title1 = big_font.render('Custom checkpoint'                              , False , small_font_color ) 
+show_speed  = big_font.render('Speed : ' + str(hero_speed)     , False , small_font_color ) ; add = big_font.render('+', False , small_font_color ) ; remove = big_font.render('-' , False , small_font_color ) ; new_craft = small_font.render('Create' , False , small_font_color ) ; ok = small_font.render('OK' , False , small_font_color ) ; apply = small_font.render('Apply' , False , small_font_color) ; cancel = small_font.render('Cancel' , False , small_font_color)
+show_gas    = big_font.render('Gas   : ' + str(gas)            , False , small_font_color )
+custom_checkpoint_title1 = big_font.render('Custom checkpoint' , False , small_font_color ) 
 
 show_mods_count = big_font.render("(" + str(len(os.listdir(mods_dir_path))) + ")" , False , small_font_color ) 
 
