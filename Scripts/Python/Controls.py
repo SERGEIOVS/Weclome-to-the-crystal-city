@@ -425,10 +425,10 @@ def start():
                 #room_floor
                 pg.draw.polygon(screen , (colors[7]) , (       
                     
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1])  ] ,
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 3  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * 3  * math.sin(fuel) ] , 
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 15 * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * 3  * math.sin(fuel) ] ,
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1])  ] , 
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0])                               , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1])  ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 3  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) + meter * 3  * math.sin(fuel) ] , 
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 15 * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) + meter * 3  * math.sin(fuel) ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1])  ] , 
                                                                   
                                                                ))
 
@@ -437,14 +437,14 @@ def start():
                 #room_celling
                 pg.draw.polygon(screen , (colors[5]) ,     (  
 
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height ] ,
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 3  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * 3  * math.sin(fuel) - room_height ] , 
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 15 * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) + meter * 3  * math.sin(fuel) - room_height ] ,
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1])  - room_height  ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0])                               , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - room_height ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 3  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) + meter * 3 * math.sin(fuel) - room_height ] , 
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 15 * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) + meter * 3 * math.sin(fuel) - room_height ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1])  - room_height  ] ,
 
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height + meter / 2 ] ,
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height + meter / 2 ] ,      
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - room_height + meter / 2 ] ,      
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - room_height + meter / 2 ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - room_height + meter / 2 ] ,      
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0])                               , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - room_height + meter / 2 ] ,      
 
                                                             ))
                 
@@ -453,14 +453,14 @@ def start():
                 #room_walls
                 pg.draw.polygon(screen , ( colors[6] ) , (  
 
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1])   ] ,
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - meter] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0])                               , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1])   ] ,
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0])                               , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - meter] ,
                                                                
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - meter ],
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) - meter ],                                                         
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - meter ],
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) - meter ],                                                         
                                                                
 
-                                                               [-camera.rect[0] + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + int(buildings_file1[i].split(',')[1]) ]
+                                                               [-camera.rect[0] + 500 + int(buildings_file1[i].split(',')[0]) + meter * 7  * math.cos(fuel) , -camera.rect[1] + 500 + int(buildings_file1[i].split(',')[1]) ]
 
                                                             ))
                 
